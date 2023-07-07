@@ -1,8 +1,4 @@
 using StateMachines;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
 
 public class GameplayState_INITIALIZING : StateBase
 {
