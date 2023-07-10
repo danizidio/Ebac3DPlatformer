@@ -5,7 +5,7 @@ public class PlayerStatesBehaviour : MonoBehaviour
 {
     public StateMachine<PlayerStates> statemachine;
 
-    Player _p;
+    public static Player _p;
     public Player p { get { return _p; } }
 
     private void Awake()
@@ -36,9 +36,18 @@ public class Player_IdleBehaviour : StateBase
 }
 public class Player_WalkingBehaviour : StateBase
 {
+    public override void OnStateEnter(object o = null)
+    {
+        PlayerStatesBehaviour._p.GetComponent<Player>().anim.SetBool("WALK", true);
+    }
     public override void OnStateStay()
     {
 
+    }
+
+    public override void OnStateExit()
+    {
+        PlayerStatesBehaviour._p.GetComponent<Player>().anim.SetBool("WALK", false);
     }
 }
 public class Player_JumpingBehaviour : StateBase

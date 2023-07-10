@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using StateMachines;
-using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -15,6 +14,8 @@ public class Player : MonoBehaviour, IDamageable
 
     Rigidbody _rb;
     [SerializeField] Animator _anim;
+    public Animator anim { get { return _anim; }set { _anim = value; } }
+
     PlayerStatesBehaviour _playerStates;
 
     [SerializeField] bool _canMove;
@@ -54,9 +55,7 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     void Moving()
-    {
-        //transform.Translate(new Vector3(XAxyz * _playerAtributes.walkSpeed, 0, ZAxyz * _playerAtributes.walkSpeed));
-        
+    {      
         Vector3 moveDirection =  new Vector3(XAxyz, 0, ZAxyz).normalized;
 
        _rb.MovePosition(_rb.position +moveDirection * _playerAtributes.walkSpeed * Time.deltaTime);
@@ -64,8 +63,6 @@ public class Player : MonoBehaviour, IDamageable
         Vector3 lookDirection = moveDirection +  transform.position;
 
         transform.LookAt(lookDirection);
-
-        _anim.SetBool("WALK", (XAxyz != 0 || ZAxyz != 0));
     }
 
     #region - InputManager Buttons
