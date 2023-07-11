@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace StateMachines
 {
@@ -15,9 +16,9 @@ namespace StateMachines
         //    SwitchState(state);
         //}
 
-        void Update()
+       public void Update()
         {
-            if (_currentState != null) _currentState.OnStateStay();
+            _currentState?.OnStateStay();
         }
 
         public void StartStateMachine()
@@ -30,11 +31,13 @@ namespace StateMachines
             states.Add(typeEnum, state);
         }
 
-        public void SwitchState(T state)
+        public void SwitchState(T state, object o = null)
         {
-            if (_currentState != null) _currentState.OnStateExit();
+            if (_currentState == states[state]) return;
+            _currentState?.OnStateExit();
+            
             _currentState = states[state];
-            _currentState.OnStateEnter();
+            _currentState.OnStateEnter(o);
         }
     }
 }

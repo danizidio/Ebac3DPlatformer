@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using StateMachines;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -17,11 +18,13 @@ public class Player : MonoBehaviour, IDamageable
     public Animator anim { get { return _anim; }set { _anim = value; } }
 
     PlayerStatesBehaviour _playerStates;
+    CharacterController _characterController;
 
     [SerializeField] bool _canMove;
     public bool canMove { get { return _canMove; } }
 
-    [SerializeField] float _speedbonus = 1;
+    [SerializeField] float _speedbonus;
+    float _currentSpeed;
 
     [SerializeField] float _currentLife;
 
@@ -29,40 +32,39 @@ public class Player : MonoBehaviour, IDamageable
     public float XAxyz { get { return _xAxyz; } set { _xAxyz = value; } }
     public float ZAxyz { get { return _zAxyz; } set { _zAxyz = value; } }
 
+    [SerializeField] bool _onGround;
+    public bool onGround { get { return _onGround; } }
+
+    bool _jumped;
+    public bool jumped { get { return _jumped; } set { _jumped = value; } }
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _playerStates = GetComponent<PlayerStatesBehaviour>();
+
+        _characterController = GetComponent<CharacterController>();
     }
 
     private void Start()
     {
+        _currentSpeed = _playerAtributes.walkSpeed;
+
         _currentLife = _playerAtributes.maxLife;
+
+        PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, this);
     }
 
-    void LateUpdate()
+    public Vector3 Moving()
     {
-        if (_canMove)
-        {
-            if((XAxyz == 0 &&  ZAxyz == 0) && IsOnGround())
-            {
-                _playerStates.statemachine.SwitchState(PlayerStates.IDLE);
-            }
+        Vector3 moveDirection = new Vector3(XAxyz, 0, ZAxyz).normalized;
 
-            Moving();
-        }
-    }
-
-    void Moving()
-    {      
-        Vector3 moveDirection =  new Vector3(XAxyz, 0, ZAxyz).normalized;
-
-       _rb.MovePosition(_rb.position +moveDirection * _playerAtributes.walkSpeed * Time.deltaTime);
-
-        Vector3 lookDirection = moveDirection +  transform.position;
+        _rb.MovePosition(_rb.position + moveDirection * _currentSpeed * Time.deltaTime);
+        
+        Vector3 lookDirection = moveDirection + transform.position;
 
         transform.LookAt(lookDirection);
+
+        return moveDirection;
     }
 
     #region - InputManager Buttons
@@ -71,8 +73,6 @@ public class Player : MonoBehaviour, IDamageable
         if (canMove)
         {
             _xAxyz = context.ReadValue<float>();
-
-            _playerStates.statemachine.SwitchState(PlayerStates.WALKING);
         }
     }
 
@@ -81,18 +81,33 @@ public class Player : MonoBehaviour, IDamageable
         if (canMove)
         {
             _zAxyz = context.ReadValue<float>();
+        }
+    }
 
-            _playerStates.statemachine.SwitchState(PlayerStates.WALKING);
+    public void Running(InputAction.CallbackContext context)
+    {
+        if (canMove)
+        {
+            if(context.performed)
+            {
+                _currentSpeed = _playerAtributes.walkSpeed * _speedbonus;
+                anim.speed = 1.5f;
+            }
+            if (context.canceled)
+            {
+                _currentSpeed = _playerAtributes.walkSpeed;
+                anim.speed = 1;
+            }
         }
     }
     public void Jumping(InputAction.CallbackContext context)
     {
-        if(canMove && IsOnGround())
+        if(canMove && onGround)
         {
-            _rb.AddForce(Vector3.up * _playerAtributes.jumpForce);
-            _playerStates.statemachine.SwitchState(PlayerStates.JUMPING);
+            Jumping();
         }
     }
+
     public void OnInteracting(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -111,6 +126,12 @@ public class Player : MonoBehaviour, IDamageable
 
     #endregion
 
+    public void Jumping()
+    {
+        _rb.AddForce(Vector3.up * _playerAtributes.jumpForce);
+        _jumped = true;
+    }
+
     public bool CanMove(bool b)
     {
         return _canMove = b;
@@ -127,29 +148,23 @@ public class Player : MonoBehaviour, IDamageable
         //ADD CALL TO GAME OVER STATE
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.gameObject.layer == 6)
-        {
-            _anim.SetBool("JUMP", false);
-        }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.gameObject.layer == 6)
-        {
-            _anim.SetBool("JUMP", true);
-        }
-    }
-
     public void DamageOutput(int damage)
     {
 
     }
 
-    public bool IsOnGround()
+    private void OnCollisionStay(Collision collision)
     {
-        return (Physics.Linecast(transform.position, _footDetector.position, 1 << LayerMask.NameToLayer("GROUND")) |
-               (Physics.Linecast(transform.position, _footDetector.position, 1 << LayerMask.NameToLayer("FLOATINGPLATFORM"))));
+        if(collision.collider.gameObject.layer == LayerMask.NameToLayer("GROUND"))
+        {
+            _onGround = true;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("GROUND"))
+        {
+            _onGround = false;
+        }
     }
 }

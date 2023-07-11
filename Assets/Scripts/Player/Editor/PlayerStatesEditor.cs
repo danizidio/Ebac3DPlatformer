@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
+using StateMachines;
 
 [CustomEditor(typeof(PlayerStatesBehaviour))]
 public class PlayerStatesEditor : Editor

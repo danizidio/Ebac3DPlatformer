@@ -5,6 +5,7 @@ namespace StateMachines
         IDLE,
         WALKING,
         JUMPING,
+        FALL,
         ATTACKING,
         TAKING_DAMAGE,
         DEAD
