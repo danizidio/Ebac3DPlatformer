@@ -123,7 +123,8 @@ public class Player : MonoBehaviour, IDamageable
         _anim.SetTrigger("DEAD");
 
         yield return new WaitForSeconds(2);
-        //GameManager.OnNextGameState?.Invoke(GamePlayStates.GAMEOVER);
+        
+        //ADD CALL TO GAME OVER STATE
     }
 
     private void OnCollisionStay(Collision collision)
