@@ -14,8 +14,8 @@ TagManager:
   - Water
   - UI
   - GROUND
-  - 
-  - 
+  - PLAYER_PROJECTILE
+  - ENEMY_PROJECTILE
   - 
   - 
   - 
