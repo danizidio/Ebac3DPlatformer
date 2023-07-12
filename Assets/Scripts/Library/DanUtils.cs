@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using UnityEditor.Rendering;
 
 namespace CommonMethodsLibrary
 {
@@ -41,6 +42,24 @@ namespace CommonMethodsLibrary
         public static string MakeReturnSceneName()
         {
             return SceneManager.GetActiveScene().name;
+        }
+
+        public static GameObject MakeSpawnSimpleProjectile(GameObject itemToSpawn,Transform whereSpawn, bool hasParent = false, Transform parent = null)
+        {
+            GameObject temp = null;
+
+            if (!hasParent)
+            {
+                temp = MonoBehaviour.Instantiate(itemToSpawn, whereSpawn.position, Quaternion.identity);
+            }
+            else
+            {
+                temp = MonoBehaviour.Instantiate(itemToSpawn, whereSpawn.position, Quaternion.identity,parent);
+            }
+
+            temp.transform.rotation = whereSpawn.rotation;
+
+            return temp;
         }
     }
 }

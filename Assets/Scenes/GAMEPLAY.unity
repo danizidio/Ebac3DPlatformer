@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7281011, g: 0.4526115, b: 0.7336169, a: 1}
+  m_IndirectSpecularColor: {r: 0.7279501, g: 0.45275268, b: 0.7338613, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4527,7 +4527,6 @@ GameObject:
   - component: {fileID: 779808309}
   - component: {fileID: 779808308}
   - component: {fileID: 779808312}
-  - component: {fileID: 779808313}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4577,12 +4576,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAtributes: {fileID: 11400000, guid: 81a1048051307804b99aba198922ecb5, type: 2}
-  _footDetector: {fileID: 1577718908}
-  _anim: {fileID: 968094085}
-  _canMove: 1
+  _shootPivot: {fileID: 1577718908}
+  _projectile: {fileID: 5297028576246425358, guid: e8a6f4317ac9c774593149718d903b1a,
+    type: 3}
   _speedbonus: 1.5
   _currentLife: 0
-  _onGround: 0
 --- !u!54 &779808310
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4772,32 +4770,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!143 &779808313
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779808306}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Height: 3
-  m_Radius: 1
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.39, z: 0}
 --- !u!1001 &803173142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6695,12 +6667,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4225146087074417852, guid: c68b193a7d9ef9044934974173df3e01,
     type: 3}
   m_PrefabInstance: {fileID: 959748731}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &968094085 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7193805671317595757, guid: 89e20167823a30d459856414377997d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 297867355}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &968612694
 PrefabInstance:
@@ -9989,9 +9955,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1577718908}
   m_Layer: 0
-  m_Name: FootDetector
+  m_Name: ShootPivot
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -10003,7 +9969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577718907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.15, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -3,24 +3,24 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using StateMachines;
-using static UnityEditor.Experimental.GraphView.GraphView;
+using CommonMethodsLibrary;
 
 public class Player : MonoBehaviour, IDamageable
 {
-    public event Action OnActing;
     public event Action OnPausing;
 
     [SerializeField] SO_Actors _playerAtributes;
-    [SerializeField] Transform _footDetector;
+    [SerializeField] Transform _shootPivot;
+    [SerializeField] GameObject _projectile;
 
     Rigidbody _rb;
-    [SerializeField] Animator _anim;
+    Animator _anim;
     public Animator anim { get { return _anim; }set { _anim = value; } }
 
     PlayerStatesBehaviour _playerStates;
     CharacterController _characterController;
 
-    [SerializeField] bool _canMove;
+    bool _canMove;
     public bool canMove { get { return _canMove; } }
 
     [SerializeField] float _speedbonus;
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour, IDamageable
     public float XAxyz { get { return _xAxyz; } set { _xAxyz = value; } }
     public float ZAxyz { get { return _zAxyz; } set { _zAxyz = value; } }
 
-    [SerializeField] bool _onGround;
+    bool _onGround;
     public bool onGround { get { return _onGround; } }
 
     bool _jumped;
@@ -41,12 +41,14 @@ public class Player : MonoBehaviour, IDamageable
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-
+        _anim = GetComponentInChildren<Animator>(); 
         _characterController = GetComponent<CharacterController>();
     }
 
     private void Start()
     {
+        _canMove = true;
+
         _currentSpeed = _playerAtributes.walkSpeed;
 
         _currentLife = _playerAtributes.maxLife;
@@ -112,7 +114,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (context.performed)
         {
-            OnActing?.Invoke();
+            DanUtils.MakeSpawnSimpleProjectile(_projectile, _shootPivot);
         }
     }
 
