@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class AmmoBase : MonoBehaviour
 {
-    [SerializeField] float _timeToDestroy;
+    [SerializeField] int _ammoLimit;
+    public int ammoLimit { get { return _ammoLimit; } }
+
     [SerializeField] float _speed;
     [SerializeField] int _damage;
+
+    [Space(10)]
+    [SerializeField] float _timeToDestroy;
+    [SerializeField] float _coolDownShoots;
+    public float coolDownShoots { get { return _coolDownShoots; } }
 
     private void Awake()
     {

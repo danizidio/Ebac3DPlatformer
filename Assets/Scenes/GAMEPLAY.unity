@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7279501, g: 0.45275268, b: 0.7338613, a: 1}
+  m_IndirectSpecularColor: {r: 0.7281011, g: 0.4526115, b: 0.7336169, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4526,6 +4526,7 @@ GameObject:
   - component: {fileID: 779808310}
   - component: {fileID: 779808309}
   - component: {fileID: 779808308}
+  - component: {fileID: 779808313}
   - component: {fileID: 779808312}
   m_Layer: 0
   m_Name: Player
@@ -4576,9 +4577,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAtributes: {fileID: 11400000, guid: 81a1048051307804b99aba198922ecb5, type: 2}
-  _shootPivot: {fileID: 1577718908}
-  _projectile: {fileID: 5297028576246425358, guid: e8a6f4317ac9c774593149718d903b1a,
-    type: 3}
   _speedbonus: 1.5
   _currentLife: 0
 --- !u!54 &779808310
@@ -4723,9 +4721,9 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 779808309}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnInteracting
+      - m_Target: {fileID: 779808313}
+        m_TargetAssemblyTypeName: WeaponLoadout, Assembly-CSharp
+        m_MethodName: Shoot
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4770,6 +4768,21 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &779808313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779808306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 869f82debd16c5e46b06bd02b3b7a4e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shootPivot: {fileID: 1577718908}
+  _projectile:
+  - {fileID: 5297028576246425358, guid: e8a6f4317ac9c774593149718d903b1a, type: 3}
 --- !u!1001 &803173142
 PrefabInstance:
   m_ObjectHideFlags: 0

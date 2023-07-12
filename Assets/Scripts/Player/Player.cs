@@ -10,15 +10,10 @@ public class Player : MonoBehaviour, IDamageable
     public event Action OnPausing;
 
     [SerializeField] SO_Actors _playerAtributes;
-    [SerializeField] Transform _shootPivot;
-    [SerializeField] GameObject _projectile;
 
     Rigidbody _rb;
     Animator _anim;
     public Animator anim { get { return _anim; }set { _anim = value; } }
-
-    PlayerStatesBehaviour _playerStates;
-    CharacterController _characterController;
 
     bool _canMove;
     public bool canMove { get { return _canMove; } }
@@ -42,7 +37,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponentInChildren<Animator>(); 
-        _characterController = GetComponent<CharacterController>();
     }
 
     private void Start()
@@ -107,14 +101,6 @@ public class Player : MonoBehaviour, IDamageable
         if(canMove && onGround)
         {
             Jumping();
-        }
-    }
-
-    public void OnInteracting(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            DanUtils.MakeSpawnSimpleProjectile(_projectile, _shootPivot);
         }
     }
 

@@ -1,0 +1,87 @@
+using CommonMethodsLibrary;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class WeaponLoadout : MonoBehaviour
+{
+    [SerializeField] Transform _shootPivot;
+    [SerializeField] GameObject[] _projectile;
+    GameObject _currentWeapon;
+
+    Coroutine _currentCoroutine;
+
+    int _currentSpentAmmo;
+
+    bool _reloading;
+
+    private void Start()
+    {
+        _currentWeapon = _projectile[0];
+    }
+
+    #region - InputManager Buttons
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        if (context.performed && !_reloading)
+        {
+            StopAction();
+            _currentCoroutine = StartCoroutine(StartShoot());
+        }
+
+        if(context.canceled)
+        {
+            StopAction();
+        }
+    }
+    #endregion
+
+
+
+    void StopAction()
+    {
+        if (_currentCoroutine != null)
+            StopCoroutine(_currentCoroutine);
+        _currentCoroutine = null;
+    }
+
+    IEnumerator StartShoot()
+    {
+        if (_reloading) yield break;
+
+        if (_currentSpentAmmo < _currentWeapon.GetComponent<AmmoBase>().ammoLimit)
+        {
+            DanUtils.MakeSpawnSimpleProjectile(_currentWeapon, _shootPivot);
+
+            _currentSpentAmmo++;
+
+            if (_currentSpentAmmo >= _currentWeapon.GetComponent<AmmoBase>().ammoLimit)
+            {
+                StopAction();
+                StartCoroutine(ReloadingCurrentWeapon());
+            }
+
+            yield return new WaitForSeconds(_currentWeapon.GetComponent<AmmoBase>().coolDownShoots);
+        }
+    }
+
+    IEnumerator ReloadingCurrentWeapon()
+    {
+        _reloading = true;
+
+        float t = 0;
+
+        while(_currentSpentAmmo > 0)
+        {
+            t += Time.deltaTime;
+            if(t >= _currentWeapon.GetComponent<AmmoBase>().coolDownShoots)
+            {
+                _currentSpentAmmo--;
+                t = 0;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+            _reloading = false;
+    }
+}
