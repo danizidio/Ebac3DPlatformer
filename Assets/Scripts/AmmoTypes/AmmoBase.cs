@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AmmoBase : MonoBehaviour
@@ -10,9 +8,9 @@ public class AmmoBase : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] int _damage;
 
-    [Space(10)]
-    [SerializeField] float _timeToDestroy;
+    [SerializeField] protected float _timeToDestroy;
     [SerializeField] float _coolDownShoots;
+    
     public float coolDownShoots { get { return _coolDownShoots; } }
 
     private void Awake()
@@ -25,13 +23,23 @@ public class AmmoBase : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * _speed);
     }
 
+    protected virtual void Shot(GameObject g, Transform t)
+    {
+
+    }
+
+    public void SpawnShot(GameObject g, Transform t)
+    {
+        Shot(g, t);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         IDamageable enemy = collision.gameObject.GetComponent<IDamageable>();
         if (enemy != null)
         {
             enemy.IDamageOutput(_damage);
-            Destroy(this.gameObject);
         }
+            Destroy(this.gameObject);
     }
 }

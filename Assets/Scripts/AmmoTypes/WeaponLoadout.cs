@@ -1,6 +1,4 @@
-using CommonMethodsLibrary;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,6 +33,15 @@ public class WeaponLoadout : MonoBehaviour
             StopAction();
         }
     }
+
+    public void ChangeWeapon(int n)
+    {
+        if (!_reloading)
+        {
+            _currentWeapon = _projectile[n];
+        }
+    }
+
     #endregion
 
 
@@ -52,7 +59,7 @@ public class WeaponLoadout : MonoBehaviour
 
         if (_currentSpentAmmo < _currentWeapon.GetComponent<AmmoBase>().ammoLimit)
         {
-            DanUtils.MakeSpawnSimpleProjectile(_currentWeapon, _shootPivot);
+            _currentWeapon.GetComponent<AmmoBase>().SpawnShot(_currentWeapon, _shootPivot);
 
             _currentSpentAmmo++;
 

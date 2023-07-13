@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7281011, g: 0.4526115, b: 0.7336169, a: 1}
+  m_IndirectSpecularColor: {r: 0.7279501, g: 0.45275268, b: 0.7338613, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4763,6 +4763,54 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4ba2e2a6-49fb-41af-a141-7f78a5d0dd48
     m_ActionName: Menu/Navigate[/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 779808313}
+        m_TargetAssemblyTypeName: WeaponLoadout, Assembly-CSharp
+        m_MethodName: ChangeWeapon
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 88874089-31a0-4bd1-a8a1-74f843594285
+    m_ActionName: Player/Weapon1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 779808313}
+        m_TargetAssemblyTypeName: WeaponLoadout, Assembly-CSharp
+        m_MethodName: ChangeWeapon
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 81e10527-e80e-4356-ba09-db1585f64c1f
+    m_ActionName: Player/Weapon2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 779808313}
+        m_TargetAssemblyTypeName: WeaponLoadout, Assembly-CSharp
+        m_MethodName: ChangeWeapon
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 111a5297-06d5-4635-aaa4-a48f8c4d7e6c
+    m_ActionName: Player/Weapon3[/Keyboard/3]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4783,6 +4831,8 @@ MonoBehaviour:
   _shootPivot: {fileID: 1577718908}
   _projectile:
   - {fileID: 5297028576246425358, guid: e8a6f4317ac9c774593149718d903b1a, type: 3}
+  - {fileID: 5297028576246425358, guid: 0f642feda074c214d85896f0b512f30e, type: 3}
+  - {fileID: 5297028576246425358, guid: 0abb9b22db899174e8d32c70cf20f292, type: 3}
 --- !u!1001 &803173142
 PrefabInstance:
   m_ObjectHideFlags: 0
