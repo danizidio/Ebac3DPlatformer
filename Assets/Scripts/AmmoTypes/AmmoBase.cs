@@ -10,6 +10,9 @@ public class AmmoBase : MonoBehaviour
 
     [SerializeField] protected float _timeToDestroy;
     [SerializeField] float _coolDownShoots;
+
+    [SerializeField] float _rechargeTime;
+    public float rechargeTime { get { return _rechargeTime; } } 
     
     public float coolDownShoots { get { return _coolDownShoots; } }
 

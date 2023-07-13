@@ -173,11 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e50308da40eb2543ba2acf08f5bfe4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ammoLimit: 2
+  _ammoLimit: 5
   _speed: 15
   _damage: 0
   _timeToDestroy: 5
-  _coolDownShoots: 1
+  _coolDownShoots: 0.2
+  _rechargeTime: 1
   _visual: {fileID: 3150651370557944971}
 --- !u!1001 &3949619231049001260
 PrefabInstance:

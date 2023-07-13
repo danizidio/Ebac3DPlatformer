@@ -47,7 +47,7 @@
                     "id": "fce1ca95-390f-47a2-96cf-3599caeb7e98",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -56,7 +56,7 @@
                     "id": "88874089-31a0-4bd1-a8a1-74f843594285",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -65,7 +65,7 @@
                     "id": "81e10527-e80e-4356-ba09-db1585f64c1f",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -74,7 +74,7 @@
                     "id": "111a5297-06d5-4635-aaa4-a48f8c4d7e6c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {

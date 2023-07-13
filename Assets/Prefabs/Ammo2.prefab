@@ -178,6 +178,7 @@ MonoBehaviour:
   _damage: 0
   _timeToDestroy: 5
   _coolDownShoots: 1
+  _rechargeTime: 2
   _ammountPerShot: 8
   _angle: 15
 --- !u!1001 &3949619231049001260

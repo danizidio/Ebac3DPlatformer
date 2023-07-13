@@ -173,11 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f75b4afeb61ceb4c83fcfbe12e337ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ammoLimit: 5
+  _ammoLimit: 2
   _speed: 40
   _damage: 0
   _timeToDestroy: 0.3
   _coolDownShoots: 2
+  _rechargeTime: 3
   _ammountPerShot: 10
   _angle: 2
   _trail: {fileID: 4021416813020553786}

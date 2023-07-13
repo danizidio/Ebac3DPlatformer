@@ -38,7 +38,9 @@ public class WeaponLoadout : MonoBehaviour
     {
         if (!_reloading)
         {
+            _currentSpentAmmo = 0;
             _currentWeapon = _projectile[n];
+            StartCoroutine(ReloadingCurrentWeapon());
         }
     }
 
@@ -55,19 +57,23 @@ public class WeaponLoadout : MonoBehaviour
     {
         if (_reloading) yield break;
 
-        if (_currentSpentAmmo < _currentWeapon.GetComponent<AmmoBase>().ammoLimit)
+        while (true)
         {
-            _currentWeapon.GetComponent<AmmoBase>().SpawnShot(_currentWeapon, _shootPivot);
-
-            _currentSpentAmmo++;
-
-            if (_currentSpentAmmo >= _currentWeapon.GetComponent<AmmoBase>().ammoLimit)
+            if (_currentSpentAmmo < _currentWeapon.GetComponent<AmmoBase>().ammoLimit)
             {
-                StopAction();
-                StartCoroutine(ReloadingCurrentWeapon());
-            }
+                _currentWeapon.GetComponent<AmmoBase>().SpawnShot(_currentWeapon, _shootPivot);
 
-            yield return new WaitForSeconds(_currentWeapon.GetComponent<AmmoBase>().coolDownShoots);
+                _currentSpentAmmo++;
+
+                if (_currentSpentAmmo >= _currentWeapon.GetComponent<AmmoBase>().ammoLimit)
+                {
+                    StopAction();
+                    StartCoroutine(ReloadingCurrentWeapon());
+                }
+
+                yield return new WaitForSeconds(_currentWeapon.GetComponent<AmmoBase>().coolDownShoots);
+                print(_currentWeapon.GetComponent<AmmoBase>().coolDownShoots);
+            }
         }
     }
 
@@ -80,7 +86,7 @@ public class WeaponLoadout : MonoBehaviour
         while(_currentSpentAmmo > 0)
         {
             t += Time.deltaTime;
-            if(t >= _currentWeapon.GetComponent<AmmoBase>().coolDownShoots)
+            if(t >= _currentWeapon.GetComponent<AmmoBase>().rechargeTime)
             {
                 _currentSpentAmmo--;
                 t = 0;
