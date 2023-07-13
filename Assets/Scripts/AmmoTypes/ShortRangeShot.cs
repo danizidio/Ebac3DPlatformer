@@ -9,11 +9,6 @@ public class ShortRangeShot : AmmoBase
 
     [SerializeField] GameObject _trail;
 
-    //private void Awake()
-    //{
-    //    DetacheParticlePlusDestroy();
-    //}
-
     protected override void Shot(GameObject g, Transform t)
     {
         int mult = 0;
@@ -32,11 +27,5 @@ public class ShortRangeShot : AmmoBase
             p.transform.localEulerAngles = Vector3.zero + Vector3.up * (i % 2 == 0 ? _angle : -_angle) * mult;
             p.transform.parent = null;
         }
-    }
-
-    void DetacheParticlePlusDestroy()
-    {
-        _trail.transform.parent = null;
-        Destroy(this.gameObject, _timeToDestroy);
     }
 }

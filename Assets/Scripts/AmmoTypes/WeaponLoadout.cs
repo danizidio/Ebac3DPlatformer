@@ -44,8 +44,6 @@ public class WeaponLoadout : MonoBehaviour
 
     #endregion
 
-
-
     void StopAction()
     {
         if (_currentCoroutine != null)
