@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AmmoBase : MonoBehaviour
@@ -39,9 +40,10 @@ public class AmmoBase : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         IDamageable enemy = collision.gameObject.GetComponent<IDamageable>();
+        
         if (enemy != null)
         {
-            enemy.IDamageOutput(_damage);
+            enemy.DamageOutput(_damage);
         }
             Destroy(this.gameObject);
     }

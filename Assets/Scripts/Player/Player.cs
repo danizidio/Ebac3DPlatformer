@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using StateMachines;
+using Animations;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -11,8 +12,9 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] SO_Actors _playerAtributes;
 
     Rigidbody _rb;
-    Animator _anim;
-    public Animator anim { get { return _anim; }set { _anim = value; } }
+
+    [SerializeField] AnimationBase _animBase;
+    public AnimationBase animBase { get { return _animBase; } }
 
     bool _canMove;
     public bool canMove { get { return _canMove; } }
@@ -35,7 +37,8 @@ public class Player : MonoBehaviour, IDamageable
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _anim = GetComponentInChildren<Animator>(); 
+        _animBase = GetComponent<AnimationBase>();
+        _animBase.SetAnim(this.GetComponentInChildren<Animator>());
     }
 
     private void Start()
@@ -86,12 +89,12 @@ public class Player : MonoBehaviour, IDamageable
             if(context.performed)
             {
                 _currentSpeed = _playerAtributes.walkSpeed * _speedbonus;
-                anim.speed = 1.5f;
+                _animBase.GetAnim().speed = 1.5f;
             }
             if (context.canceled)
             {
                 _currentSpeed = _playerAtributes.walkSpeed;
-                anim.speed = 1;
+                _animBase.GetAnim().speed = 1;
             }
         }
     }
@@ -128,7 +131,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         _canMove = false;
 
-        _anim.SetTrigger("DEAD");
+        PlayerAnimation(AnimationType.DEAD);
 
         yield return new WaitForSeconds(2);
         
@@ -138,6 +141,11 @@ public class Player : MonoBehaviour, IDamageable
     public void DamageOutput(int damage)
     {
 
+    }
+
+    public void PlayerAnimation(AnimationType animationType)
+    {
+        _animBase.PlayAnim(animationType);
     }
 
     private void OnCollisionStay(Collision collision)

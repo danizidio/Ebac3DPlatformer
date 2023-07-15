@@ -1,6 +1,8 @@
 using UnityEngine;
 using StateMachines;
 using System;
+using static UnityEditor.Experimental.GraphView.GraphView;
+
 public class PlayerStatesBehaviour : MonoBehaviour
 {
     public static Action<PlayerStates, object> OnPlayerStateChange;
@@ -37,10 +39,9 @@ public class Player_IdleBehaviour : StateBase
     {
         _player = o as Player;
 
-        _player.anim.SetBool("WALK", false);
-        _player.anim.SetBool("JUMP", false);
-
-        Debug.Log("entrou do idle");
+        _player.animBase.PlayAnim(Animations.AnimationType.WALK, false);
+        
+        //Debug.Log("entrou do idle");
     }
 
     public override void OnStateStay()
@@ -58,7 +59,7 @@ public class Player_IdleBehaviour : StateBase
 
     public override void OnStateExit()
     {
-        Debug.Log("saiu do idle");
+        //Debug.Log("saiu do idle");
     }
 
 }
@@ -69,8 +70,8 @@ public class Player_WalkingBehaviour : StateBase
     public override void OnStateEnter(object o = null)
     {
         _player = (Player)o;
-        _player.anim.SetBool("WALK", true);
-        Debug.Log("entrou no walk");
+        _player.animBase.PlayAnim(Animations.AnimationType.WALK, true);
+        //Debug.Log("entrou no walk");
     }
 
     public override void OnStateStay()
@@ -90,8 +91,8 @@ public class Player_WalkingBehaviour : StateBase
 
     public override void OnStateExit()
     {
-        _player.anim.SetBool("WALK", false);
-        Debug.Log("saiu do walk");
+        _player.animBase.PlayAnim(Animations.AnimationType.WALK, false);
+        //Debug.Log("saiu do walk");
     }
 }
 public class Player_JumpingBehaviour : StateBase
@@ -100,16 +101,14 @@ public class Player_JumpingBehaviour : StateBase
     public override void OnStateEnter(object o = null)
     {
         _player = (Player)o;
-
-        _player.anim.SetBool("JUMP", true);
-
-        Debug.Log("entrou no jump");
+        _player.animBase.PlayAnim(Animations.AnimationType.JUMP, true);
+        //Debug.Log("entrou no jump");
     }
 
     public override void OnStateStay()
     {
         _player.Moving();
-        Debug.Log("no ar");
+        //Debug.Log("no ar");
 
         _player.jumped = false;
 
@@ -118,7 +117,7 @@ public class Player_JumpingBehaviour : StateBase
 
     public override void OnStateExit()
     {
-        Debug.Log("saiu do jump");
+        //Debug.Log("saiu do jump");
     }
 }
 
@@ -129,16 +128,16 @@ public class Player_Fall : StateBase
     {
         _player = (Player)o;
 
-        _player.anim.SetBool("JUMP", true);
+        _player.animBase.PlayAnim(Animations.AnimationType.FALL, true);
 
-        Debug.Log("entrou na queda");
+        //Debug.Log("entrou na queda");
     }
 
     public override void OnStateStay()
     {
         if (_player.onGround)
         {
-            Debug.Log("no chao");
+            //Debug.Log("no chao");
             
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, _player);
         }
@@ -146,7 +145,7 @@ public class Player_Fall : StateBase
 
     public override void OnStateExit()
     {
-        Debug.Log("no chão");
+        //Debug.Log("no chão");
     }
 }
 public class Player_AttackingBehaviour : StateBase

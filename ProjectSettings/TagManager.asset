@@ -16,8 +16,8 @@ TagManager:
   - GROUND
   - PLAYER_PROJECTILE
   - ENEMY_PROJECTILE
-  - 
-  - 
+  - ENEMY
+  - PLAYER
   - 
   - 
   - 

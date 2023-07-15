@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3790895678693299245}
   - component: {fileID: 301205410823992539}
   - component: {fileID: 5177575476391274268}
-  - component: {fileID: 5191607996075433473}
   m_Layer: 7
   m_Name: Ammo1
   m_TagString: Untagged
@@ -62,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fcb3d7f4bd4eb7b4ca298088ebbff5fa, type: 2}
+  - {fileID: 2100000, guid: 7a83ecb62c0b10e408be759c8ef26d1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5191607996075433473
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3150651370557944971}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5297028576246425358
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,10 +92,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3203477009502379626}
+  - component: {fileID: 2564173513133969060}
   - component: {fileID: 6164194471681854054}
-  - component: {fileID: 6216641787099845213}
+  - component: {fileID: -4943852272328632769}
   m_Layer: 7
-  m_Name: Ammo1
+  m_Name: Ammo2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,6 +119,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &2564173513133969060
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5297028576246425358}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6164194471681854054
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -161,7 +167,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6216641787099845213
+--- !u!114 &-4943852272328632769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,16 +176,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5297028576246425358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e50308da40eb2543ba2acf08f5bfe4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1047f464b3805c249bf9ef49898968fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ammoLimit: 5
+  _ammoLimit: 2
   _speed: 15
   _damage: 0
   _timeToDestroy: 5
-  _coolDownShoots: 0.2
-  _rechargeTime: 1
-  _visual: {fileID: 3150651370557944971}
+  _coolDownShoots: 1
+  _rechargeTime: 2
+  _ammountPerShot: 8
+  _angle: 15
 --- !u!1001 &3949619231049001260
 PrefabInstance:
   m_ObjectHideFlags: 0

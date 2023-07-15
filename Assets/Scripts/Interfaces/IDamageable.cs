@@ -1,6 +1,6 @@
 public interface IDamageable
 {
-    void IDamageOutput(int dmg)
+    void DamageOutput(int dmg)
     {
 
     }
