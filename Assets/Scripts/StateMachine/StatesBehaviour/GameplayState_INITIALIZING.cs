@@ -1,29 +1,17 @@
 using StateMachines;
+using System;
 
 public class GameplayState_INITIALIZING : StateBase
 {
-    ////void Start()
-    ////{
-    ////  StartCoroutine(CorroutineFindPlayer());
-    ////}
+    public override void OnStateEnter(object o = null)
+    {        
 
-    ////IEnumerator CorroutineFindPlayer()
-    ////{
-    ////    GameObject _p = GameObject.FindGameObjectWithTag("Player");
-
-    ////    yield return new WaitForSeconds(.02f);
-
-    ////    if (_p != null)
-    ////    {
-    ////        //GetComponent<CinemachineVirtualCamera>().Follow = _p.transform;
-
-    ////        //GameManager.OnNextGameState?.Invoke(GamePlayStates.START);
-
-    ////        //GameManager.OnSetPlayer?.Invoke(_p);
-
-    ////        StopCoroutine(CorroutineFindPlayer());
-    ////    }
-
-        
-    //}
+    }
+    public override void OnStateStay()
+    {
+        if (GameManager.OnFindPlayer?.Invoke() != null)
+        {
+            GameplaySateMachine.OnGameStateChange?.Invoke(GameStates.START, null);
+        }
+    }
 }

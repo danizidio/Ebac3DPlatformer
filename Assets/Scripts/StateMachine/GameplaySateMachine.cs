@@ -1,12 +1,15 @@
 using UnityEngine;
 using StateMachines;
+using System;
 
 public class GameplaySateMachine : MonoBehaviour
 {
+    public static Action<GameStates, object> OnGameStateChange;
+
     public StateMachine<GameStates> statemachine;
-    void Start()
+
+    void Awake()
     {
-        //statemachine = new StateMachine<GameStates>(GameStates.INITIALIZING);
         statemachine = new StateMachine<GameStates>();
 
         statemachine.StartStateMachine();
@@ -17,6 +20,15 @@ public class GameplaySateMachine : MonoBehaviour
         statemachine.RegisterStates(GameStates.PAUSE, new StateBase());
         statemachine.RegisterStates(GameStates.GAMEOVER, new StateBase());
 
-        statemachine.SwitchState(GameStates.INITIALIZING);
+        OnGameStateChange = statemachine.SwitchState;
+    }
+
+    private void Start()
+    {
+        OnGameStateChange?.Invoke(GameStates.INITIALIZING, null);
+    }
+    void Update()
+    {
+        statemachine.Update();
     }
 }

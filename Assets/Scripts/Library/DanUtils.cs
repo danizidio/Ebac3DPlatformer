@@ -8,10 +8,28 @@ namespace CommonMethodsLibrary
 {
     public static class DanUtils
     {
-        public static Tween MakeScaleAnimation(this Transform t, float desirableSize, float time)
+        public static Tween MakeScaleAnimation(this Transform t, float time, float desirableSize = 1,  bool changePrefabSize = false)
         {
-            t.transform.localScale = Vector3.zero;
-            return t.transform.DOScale(desirableSize, time);
+            if (changePrefabSize)
+            {
+                t.transform.localScale = Vector3.zero;
+                return t.transform.DOScale(desirableSize, time);
+            }
+            else
+            {
+                return t.DOScale(0, time).SetEase(Ease.OutBack).From();
+            }
+        }
+        public static Tween MakeFlashColor(Material characterMesh, Color flashColor, float time, string materialProperty = null)
+        {
+            if (materialProperty != null)
+            {
+                return characterMesh.DOColor(flashColor, materialProperty, time).SetLoops(2,LoopType.Yoyo);
+            }
+            else
+            {
+                return characterMesh.DOColor(flashColor, "_Color", time).SetLoops(2, LoopType.Yoyo);
+            }
         }
         public static void MakeScale(this Transform t, Vector3 desirableSize)
         {

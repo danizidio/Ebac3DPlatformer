@@ -2,13 +2,14 @@ using CommonMethodsLibrary;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] SO_GameObjects _gameObjects;
 
     public static Func<Color> OnChangeColor;
+    public static Func<Player> OnFindPlayer;
 
     public static Action OnCallObj;
 
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour
         _colorList.Add(c);
     }
 
-    [Button]
     public void InstantiateObjects()
     {
         try
@@ -38,18 +38,22 @@ public class GameManager : MonoBehaviour
             GameObject[] t = GameObject.FindGameObjectsWithTag("SPAWN");
 
             GameObject g = DanUtils.MakeRandomItemList(_gameObjects.gameObjects);
-            GameObject temp = Instantiate(g, DanUtils.MakeRandomItemArray(t).transform.position, Quaternion.identity);
-            DanUtils.MakeScaleAnimation(temp.transform, 1, .5f);
+
+            GameObject spawnPos = DanUtils.MakeRandomItemArray(t);
+
+            GameObject temp = Instantiate(g, spawnPos.transform.position, Quaternion.identity);
+            DanUtils.MakeScaleAnimation(temp.transform, .5f);
+
+            spawnPos.SetActive(false);
         }
         catch
         {
             GameObject g = DanUtils.MakeRandomItemList(_gameObjects.gameObjects);
             GameObject temp = Instantiate(g, Vector3.zero, Quaternion.identity);
-            DanUtils.MakeScaleAnimation(temp.transform, 1, .5f);
+            DanUtils.MakeScaleAnimation(temp.transform, .5f);
         }  
     }
 
-    [Button]
     public void ChangeEnemyColor()
     {
         GameObject[] t = GameObject.FindGameObjectsWithTag("ENEMY");
@@ -69,10 +73,34 @@ public class GameManager : MonoBehaviour
         DanUtils.MakeRandomItemArray(t).GetComponent<MeshRenderer>().material.color = ChangeColor();
     }
 
+    Player FindingPlayer()
+    {
+        Player temp = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        return temp;
+    }
+
+    public IEnumerator RoutineSpawnEnemies()
+    {
+        InstantiateObjects();
+
+        yield return new WaitForSeconds(1);
+
+        InstantiateObjects();
+
+        yield return new WaitForSeconds(1);
+
+        InstantiateObjects(); 
+        
+        yield return new WaitForSeconds(1);
+
+        InstantiateObjects();
+    }
 
     private void OnEnable()
     {
         OnChangeColor = ChangeColor;
         OnCallObj = InstantiateObjects;
+        OnFindPlayer = FindingPlayer;
     }
 }

@@ -181,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ammoLimit: 2
   _speed: 15
-  _damage: 0
+  _damage: 1
   _timeToDestroy: 5
   _coolDownShoots: 1
   _rechargeTime: 2
