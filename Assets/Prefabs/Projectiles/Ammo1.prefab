@@ -182,6 +182,7 @@ MonoBehaviour:
   _ammoLimit: 5
   _speed: 15
   _damage: 2
+  _targetHitFeedback: 3
   _timeToDestroy: 5
   _coolDownShoots: 0.2
   _rechargeTime: 1

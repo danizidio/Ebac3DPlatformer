@@ -9,6 +9,9 @@ public class AmmoBase : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] int _damage;
 
+    [SerializeField] float _targetHitFeedback;
+    public float targetHitFeedback { get { return _targetHitFeedback; } }
+
     [SerializeField] protected float _timeToDestroy;
     [SerializeField] float _coolDownShoots;
 
@@ -43,7 +46,10 @@ public class AmmoBase : MonoBehaviour
         
         if (enemy != null)
         {
-            enemy.DamageOutput(_damage);
+            Vector3 direction = collision.transform.position - transform.position;
+            direction = -direction.normalized;
+
+            enemy.DamageOutput(_damage, direction);
         }
             Destroy(this.gameObject);
     }

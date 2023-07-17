@@ -1,7 +1,6 @@
 using Animations;
 using CommonMethodsLibrary;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -17,9 +16,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     [SerializeField] float _maxHealth;
 
-    [SerializeField] protected float _currentLife;
+    protected float _currentLife;
 
-    protected float _moveSpeed;
+    [SerializeField] protected float _moveSpeed;
 
     bool _canMove;
     public bool canMove { get { return _canMove; } }
@@ -55,16 +54,16 @@ public class EnemyBase : MonoBehaviour, IDamageable
         _currentLife = _maxHealth;
     }
 
-    public void DamageOutput(int damage)
+    public void DamageOutput(int damage, Vector3 pullFeedback)
     {
         _currentLife -= damage;
 
         _hitFeedback.Emit(10);
 
+        transform.position -= pullFeedback;
+
         if (!_currentTween.IsActive())
         {
-
-
             _currentTween = DanUtils.MakeFlashColor(mr.material, _flashColor, .1f,"_EmissionColor");
         }
 
@@ -77,6 +76,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
             {
                 effect.Play();
             }
+
+            _player = null;
 
             _hitFeedback.Emit(30);
             Destroy(this.gameObject, 4f);

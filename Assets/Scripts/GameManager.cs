@@ -14,8 +14,15 @@ public class GameManager : MonoBehaviour
     public static Action OnCallObj;
 
     [SerializeField] List<Color> _colorList;
-
     public List<Color> colorList { get { return _colorList; } }
+
+    [SerializeField] float _timeBetweenEnemieSpawn;
+    [SerializeField] bool _canSpawnEnemies;
+
+    public bool CanSpawnEnemies(bool b)
+    {
+        return _canSpawnEnemies = b;
+    }
 
     public Color ChangeColor()
     {
@@ -44,7 +51,7 @@ public class GameManager : MonoBehaviour
             GameObject temp = Instantiate(g, spawnPos.transform.position, Quaternion.identity);
             DanUtils.MakeScaleAnimation(temp.transform, .5f);
 
-            spawnPos.SetActive(false);
+           // spawnPos.SetActive(false);
         }
         catch
         {
@@ -82,19 +89,17 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator RoutineSpawnEnemies()
     {
-        InstantiateObjects();
+        while (_canSpawnEnemies)
+        {
+            InstantiateObjects();
 
-        yield return new WaitForSeconds(1);
+            if(!_canSpawnEnemies)
+            {
+                StopCoroutine(RoutineSpawnEnemies());
+            }
 
-        InstantiateObjects();
-
-        yield return new WaitForSeconds(1);
-
-        InstantiateObjects(); 
-        
-        yield return new WaitForSeconds(1);
-
-        InstantiateObjects();
+            yield return new WaitForSeconds(_timeBetweenEnemieSpawn);
+        }
     }
 
     private void OnEnable()

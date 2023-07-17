@@ -25,7 +25,7 @@ public class GameplaySateMachine : MonoBehaviour
 
     private void Start()
     {
-        OnGameStateChange?.Invoke(GameStates.INITIALIZING, null);
+        OnGameStateChange?.Invoke(GameStates.INITIALIZING, this.gameObject.GetComponent<GameManager>());
     }
     void Update()
     {

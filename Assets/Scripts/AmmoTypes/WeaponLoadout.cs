@@ -72,7 +72,6 @@ public class WeaponLoadout : MonoBehaviour
                 }
 
                 yield return new WaitForSeconds(_currentWeapon.GetComponent<AmmoBase>().coolDownShoots);
-                print(_currentWeapon.GetComponent<AmmoBase>().coolDownShoots);
             }
         }
     }
