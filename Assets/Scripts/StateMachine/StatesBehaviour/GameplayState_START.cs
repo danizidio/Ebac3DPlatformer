@@ -8,7 +8,7 @@ public class GameplayState_START : StateBase
     public override void OnStateEnter(object o = null)
     {
         g = (GameManager)o;
-        g.CanSpawnEnemies(true);
+        //g.CanSpawnEnemies(true);
     }
     public override void OnStateStay()
     {

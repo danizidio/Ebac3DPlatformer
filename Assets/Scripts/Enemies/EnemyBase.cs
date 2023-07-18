@@ -69,6 +69,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void SetColors(Color color, string shaderProperty = null)
     {
+        _hitFeedback.GetComponent<Renderer>().material.color = _predominantColor;
+     
         if (shaderProperty != null)
         {
             _mr.material.SetColor(shaderProperty, color);
@@ -76,12 +78,11 @@ public class EnemyBase : MonoBehaviour, IDamageable
         }
         else
         {
-            _hitFeedback.GetComponent<Renderer>().material.color = _predominantColor;
             _mr.material.color = color;
         }
     }
 
-    public void DamageOutput(int damage, Vector3 pullFeedback)
+    public virtual void DamageOutput(int damage, Vector3 pullFeedback)
     {
         _currentLife -= damage;
 
