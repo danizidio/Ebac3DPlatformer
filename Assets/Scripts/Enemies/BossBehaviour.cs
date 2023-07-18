@@ -6,7 +6,10 @@ public class BossBehaviour : EnemyBase
 {
     [SerializeField] string[] _shaderProperties;
     float hdr = 0.0085f;
-    
+
+    [SerializeField] GameObject _minionSpawn;
+    [SerializeField] Transform _spawnPivot;
+
     private void Start()
     {
         Init();

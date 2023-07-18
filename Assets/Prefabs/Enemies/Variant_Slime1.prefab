@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       propertyPath: _moveSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
@@ -80,8 +80,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
+      propertyPath: _useRandomColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
       propertyPath: _flashColor.rgba
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: _distanceToAction
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: _timeBetweenBites
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: _predominantColor.b
+      value: 0.084820986
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: _predominantColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: _predominantColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}

@@ -15,6 +15,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
     AnimationBase _animBase;
     protected AnimationBase animBase { get { return _animBase; } }
 
+    protected MeshRenderer _mr;
+
     [SerializeField] float _maxHealth;
 
     protected float _currentLife;
@@ -35,7 +37,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] ParticleSystem _hitFeedback;
     [SerializeField] VisualEffect[] _effectAsset;
 
-    protected MeshRenderer _mr;
+    [SerializeField] float _distanceToAction;
+    protected float _currentDistance;
 
     protected virtual void Init()
     {
@@ -105,6 +108,22 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
             _hitFeedback.Emit(30);
             Destroy(this.gameObject, 4f);
+        }
+    }
+
+    protected bool PlayerOnSight()
+    {
+        if (_player == null) return false;
+
+        _currentDistance = Vector3.Distance(this.transform.position, _player.transform.position);
+
+        if (_currentDistance <= _distanceToAction)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

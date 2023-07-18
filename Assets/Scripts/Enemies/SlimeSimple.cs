@@ -1,7 +1,13 @@
+using CommonMethodsLibrary;
+using System.Collections;
 using UnityEngine;
 
 public class SlimeSimple : EnemyBase
 {
+    Coroutine _coroutine;
+
+    [SerializeField] float _timeBetweenBites;
+
     private void Awake()
     {
         Init();
@@ -12,12 +18,45 @@ public class SlimeSimple : EnemyBase
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (_player == null) return;
 
-        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, _moveSpeed * Time.deltaTime);
         transform.LookAt(_player.transform.position);
+
+        if (PlayerOnSight())
+        {
+            if (_coroutine == null)
+            {
+                _coroutine = StartCoroutine(Attack());
+            }
+        }
+        else
+        {
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+                _coroutine = null;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, _moveSpeed * Time.deltaTime);
+            animBase.PlayAnim(Animations.AnimationType.WALK);
+        }
     }
 
+    IEnumerator Attack()
+    {
+        while (PlayerOnSight())
+        {
+            animBase.PlayAnim(Animations.AnimationType.ATTACK);
+
+            if (!PlayerOnSight())
+            {
+                StopCoroutine(_coroutine);
+            }
+
+            yield return new WaitForSeconds(_timeBetweenBites);
+            
+            animBase.PlayAnim(Animations.AnimationType.IDLE);
+        }
+    }
 }

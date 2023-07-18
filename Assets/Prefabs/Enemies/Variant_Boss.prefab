@@ -131,9 +131,9 @@ MonoBehaviour:
   _flashColor:
     serializedVersion: 2
     rgba: 16777215
-  _predominantColor:
-    serializedVersion: 2
-    rgba: 3933445
+  _useRandomColor: 0
+  _predominantColor: {r: 0.014195444, g: 0.022865005, b: 0.2735849, a: 0}
+  _emissionColor: {r: 0, g: 0, b: 0, a: 0}
   _hitFeedback: {fileID: 2120038961620429710}
   _effectAsset:
   - {fileID: 7135708423997785043}

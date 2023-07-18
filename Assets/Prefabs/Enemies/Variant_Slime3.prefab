@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3640772824447399372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4326015629264435989}
+  m_Layer: 0
+  m_Name: ShootPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4326015629264435989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640772824447399372}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.19, y: 3.5, z: -2.82}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3661026876527971398}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1001 &3124607882514760168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11,7 +42,7 @@ PrefabInstance:
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
@@ -63,23 +94,106 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: _moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: _useRandomColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: _predominantColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: _predominantColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: _predominantColor.r
+      value: 0.80882215
+      objectReference: {fileID: 0}
     - target: {fileID: 8767848817764980286, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       propertyPath: m_Name
       value: Variant_Slime3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       insertIndex: 0
       addedObject: {fileID: 3661026876527971398}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8767848817764980286, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2350918271875127853}
   m_SourcePrefab: {fileID: 100100000, guid: cc0c8f2d0fef35541b0371b27015e006, type: 3}
+--- !u!2083052967 &1714926005069924581 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 4364113717850818829, guid: cc0c8f2d0fef35541b0371b27015e006,
+    type: 3}
+  m_PrefabInstance: {fileID: 3124607882514760168}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3239657865642351902 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
+    type: 3}
+  m_PrefabInstance: {fileID: 3124607882514760168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &5456536265848354620 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 6982079717151143636, guid: cc0c8f2d0fef35541b0371b27015e006,
+    type: 3}
+  m_PrefabInstance: {fileID: 3124607882514760168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5976697113035691990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8767848817764980286, guid: cc0c8f2d0fef35541b0371b27015e006,
+    type: 3}
+  m_PrefabInstance: {fileID: 3124607882514760168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2350918271875127853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5976697113035691990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75441350d2966b42b3ab56e817e3236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 10
+  _moveSpeed: 1
+  _flashColor:
+    serializedVersion: 2
+    rgba: 16777215
+  _useRandomColor: 0
+  _predominantColor: {r: 0.8078432, g: 0, b: 1, a: 0}
+  _emissionColor: {r: 0, g: 0, b: 0, a: 0}
+  _hitFeedback: {fileID: 7611190198377701560}
+  _effectAsset:
+  - {fileID: 1714926005069924581}
+  - {fileID: 5456536265848354620}
+  _distanceToAction: 30
+  _shootPivot: {fileID: 4326015629264435989}
+  _projectile: {fileID: 5297028576246425358, guid: 3fc2e257a34aaf44cb10f2124641103c,
+    type: 3}
+  _timeBetweenShots: 2
+--- !u!198 &7611190198377701560 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4826934629603828048, guid: cc0c8f2d0fef35541b0371b27015e006,
     type: 3}
   m_PrefabInstance: {fileID: 3124607882514760168}
   m_PrefabAsset: {fileID: 0}
@@ -175,7 +289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6281779893053664936, guid: 8bec79f815163ae43b0faf61a3b8baca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4326015629264435989}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
 --- !u!4 &3661026876527971398 stripped
