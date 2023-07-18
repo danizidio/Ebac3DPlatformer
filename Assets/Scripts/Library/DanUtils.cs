@@ -8,7 +8,7 @@ namespace CommonMethodsLibrary
 {
     public static class DanUtils
     {
-        public static Tween MakeScaleAnimation(this Transform t, float time, float desirableSize = 1,  bool changePrefabSize = false)
+        public static Tween MakeScaleAnimation(this Transform t, float time, float desirableSize = 1, bool changePrefabSize = false)
         {
             if (changePrefabSize)
             {
@@ -20,11 +20,12 @@ namespace CommonMethodsLibrary
                 return t.DOScale(0, time).SetEase(Ease.OutBack).From();
             }
         }
+
         public static Tween MakeFlashColor(Material characterMesh, Color flashColor, float time, string materialProperty = null)
         {
             if (materialProperty != null)
             {
-                return characterMesh.DOColor(flashColor, materialProperty, time).SetLoops(2,LoopType.Yoyo);
+                return characterMesh.DOColor(flashColor, materialProperty, time).SetLoops(2, LoopType.Yoyo);
             }
             else
             {
@@ -35,15 +36,18 @@ namespace CommonMethodsLibrary
         {
             t.localScale = desirableSize;
         }
+
         public static T MakeRandomItemArray<T>(this T[] array)
         {
-            if(array.Length == 0) return default(T);
+            if (array.Length == 0) return default(T);
             return (T)array[Random.Range(0, array.Length)];
         }
+
         public static T MakeRandomItemList<T>(this List<T> list)
         {
             return list[Random.Range(0, list.Count)];
         }
+
         public static IEnumerator MakeChangeScene(this string sceneName)
         {
             AsyncOperation loading = SceneManager.LoadSceneAsync(sceneName);
@@ -61,7 +65,7 @@ namespace CommonMethodsLibrary
             return SceneManager.GetActiveScene().name;
         }
 
-        public static GameObject MakeSpawnSimpleProjectile(GameObject itemToSpawn,Transform whereSpawn, bool hasParent = false, Transform parent = null)
+        public static GameObject MakeSpawnSimpleProjectile(GameObject itemToSpawn, Transform whereSpawn, bool hasParent = false, Transform parent = null)
         {
             GameObject temp = null;
 
@@ -71,12 +75,18 @@ namespace CommonMethodsLibrary
             }
             else
             {
-                temp = MonoBehaviour.Instantiate(itemToSpawn, whereSpawn.position, Quaternion.identity,parent);
+                temp = MonoBehaviour.Instantiate(itemToSpawn, whereSpawn.position, Quaternion.identity, parent);
             }
 
             temp.transform.rotation = whereSpawn.rotation;
 
             return temp;
+        }
+
+
+        public static string AppVersion()
+        {
+            return "Version: " + Application.version.ToString();
         }
     }
 }

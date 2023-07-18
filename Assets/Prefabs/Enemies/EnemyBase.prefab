@@ -5331,10 +5331,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 10
-  _currentLife: 0
+  _moveSpeed: 0
   _flashColor:
     serializedVersion: 2
-    rgba: 4278190335
+    rgba: 4294967295
   _predominantColor:
     serializedVersion: 2
     rgba: 0

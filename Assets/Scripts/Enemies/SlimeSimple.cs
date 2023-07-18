@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SlimeEnemy : EnemyBase
+public class SlimeSimple : EnemyBase
 {
     private void Awake()
     {

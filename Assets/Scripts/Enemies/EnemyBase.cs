@@ -1,6 +1,7 @@
 using Animations;
 using CommonMethodsLibrary;
 using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -27,24 +28,33 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     [SerializeField] Color32 _flashColor;
 
-    [SerializeField] Color32 _predominantColor;
+    [SerializeField] bool _useRandomColor;
+    [SerializeField] protected Color _predominantColor;
+    [SerializeField] protected Color _emissionColor;
 
     [SerializeField] ParticleSystem _hitFeedback;
     [SerializeField] VisualEffect[] _effectAsset;
 
-    MeshRenderer mr;
+    protected MeshRenderer _mr;
 
     protected virtual void Init()
     {
         _rb = GetComponent<Rigidbody>();
         _animBase = GetComponent<AnimationBase>();
-        mr = this.GetComponentInChildren<MeshRenderer>();
+        _mr = this.GetComponentInChildren<MeshRenderer>();
         _animBase.SetAnim(this.GetComponentInChildren<Animator>());
-        
-        mr.material.color = _predominantColor;
 
-        _hitFeedback.GetComponent<Renderer>().material.color = _predominantColor;
-        _hitFeedback.GetComponent<Renderer>().material.SetColor("_EmissionColor", _predominantColor);
+        if (_useRandomColor)
+        {
+            if (GameManager.OnChangeColor != null)
+            {
+                _predominantColor = GameManager.OnChangeColor.Invoke();
+                _emissionColor = GameManager.OnChangeColor.Invoke();
+            }
+        }
+
+        SetColors(_predominantColor, "_BaseColor");
+        SetColors(_emissionColor, "_EmissionColor");
 
         foreach (VisualEffect effect in _effectAsset)
         {
@@ -52,6 +62,20 @@ public class EnemyBase : MonoBehaviour, IDamageable
         }
 
         _currentLife = _maxHealth;
+    }
+
+    protected virtual void SetColors(Color color, string shaderProperty = null)
+    {
+        if (shaderProperty != null)
+        {
+            _mr.material.SetColor(shaderProperty, color);
+            _hitFeedback.GetComponent<Renderer>().material.SetColor(shaderProperty, color);
+        }
+        else
+        {
+            _hitFeedback.GetComponent<Renderer>().material.color = _predominantColor;
+            _mr.material.color = color;
+        }
     }
 
     public void DamageOutput(int damage, Vector3 pullFeedback)
@@ -64,7 +88,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
         if (!_currentTween.IsActive())
         {
-            _currentTween = DanUtils.MakeFlashColor(mr.material, _flashColor, .1f,"_EmissionColor");
+            _currentTween = DanUtils.MakeFlashColor(_mr.material, _flashColor, .1f,"_EmissionColor");
         }
 
         if(_currentLife <= 0)
