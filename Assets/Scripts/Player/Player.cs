@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using System;
 using StateMachines;
 using Animations;
+using NaughtyAttributes;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -24,6 +25,8 @@ public class Player : MonoBehaviour, IDamageable
 
     [SerializeField] float _currentLife;
 
+    PlayerLifebar _lifebar;
+
     float _xAxyz, _zAxyz;
     public float XAxyz { get { return _xAxyz; } set { _xAxyz = value; } }
     public float ZAxyz { get { return _zAxyz; } set { _zAxyz = value; } }
@@ -39,6 +42,7 @@ public class Player : MonoBehaviour, IDamageable
         _rb = GetComponent<Rigidbody>();
         _animBase = GetComponent<AnimationBase>();
         _animBase.SetAnim(this.GetComponentInChildren<Animator>());
+        _lifebar = FindAnyObjectByType<PlayerLifebar>();
     }
 
     private void Start()
@@ -138,9 +142,18 @@ public class Player : MonoBehaviour, IDamageable
         //ADD CALL TO GAME OVER STATE
     }
 
-    public void DamageOutput(int damage)
+    public void DamageOutput(int damage, Vector3 pullFeedback)
     {
+        _currentLife -= damage;
 
+        transform.position -= pullFeedback;
+
+        _lifebar.onUpdateLifeBar?.Invoke(_currentLife, _playerAtributes.maxLife);
+
+        if (_currentLife < 1)
+        {
+            AnimGameOver();
+        }
     }
 
     public void PlayerAnimation(AnimationType animationType)

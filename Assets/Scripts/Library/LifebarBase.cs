@@ -10,7 +10,8 @@ namespace CommonMethodsLibrary
         public UpdatingLifeBar onUpdateLifeBar;
 
         Animator anim;
-        [SerializeField] Image img, img2;
+
+        [SerializeField] Image _lifebarRed, _lifebarWhite;
 
         [SerializeField] Color fullLife, notFullLife, averageLife, criticalLife;
 
@@ -22,10 +23,10 @@ namespace CommonMethodsLibrary
 
             anim = this.GetComponent<Animator>();
 
-            img.fillAmount = 1;
-            img2.fillAmount = 1;
+            _lifebarRed.fillAmount = 1;
+            _lifebarWhite.fillAmount = 1;
 
-            img.color = fullLife;
+            _lifebarRed.color = fullLife;
         }
 
         public void UpdateLifeBar(float currentLife, float maxLife)
@@ -34,30 +35,30 @@ namespace CommonMethodsLibrary
 
             float value = currentLife / maxLife;
 
-            img.fillAmount = value;
+            _lifebarRed.fillAmount = value;
 
             if (currentLife < 0)
             {
-                img.fillAmount = 0;
+                _lifebarRed.fillAmount = 0;
             }
 
             StartCoroutine(RedBarUpdate(value, currentLife, maxLife));
 
             if (value <= .3f)
             {
-                img.color = criticalLife;
+                _lifebarRed.color = criticalLife;
             }
             else if (value >= .9f && value <= 1f)
             {
-                img.color = notFullLife;
+                _lifebarRed.color = notFullLife;
             }
             else if (value >= .3f && value <= .9f)
             {
-                img.color = averageLife;
+                _lifebarRed.color = averageLife;
             }
             else
             {
-                img.color = new Color32(50, 255, 0, 255);
+                _lifebarRed.color = new Color32(50, 255, 0, 255);
             }
         }
 
@@ -67,7 +68,7 @@ namespace CommonMethodsLibrary
 
             float value2 = currentLife / maxLife;
 
-            img2.fillAmount = value2;
+            _lifebarWhite.fillAmount = value2;
 
             if (value2 < 0)
             {

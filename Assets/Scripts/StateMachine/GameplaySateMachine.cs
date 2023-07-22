@@ -17,6 +17,7 @@ public class GameplaySateMachine : MonoBehaviour
         statemachine.RegisterStates(GameStates.INITIALIZING, new GameplayState_INITIALIZING());
         statemachine.RegisterStates(GameStates.START, new GameplayState_START());
         statemachine.RegisterStates(GameStates.GAMEPLAY, new GameplayState_GAMEPLAY());
+        statemachine.RegisterStates(GameStates.BOSS_BATTLE, new GameplayState_BOSSBATTLE());
         statemachine.RegisterStates(GameStates.PAUSE, new StateBase());
         statemachine.RegisterStates(GameStates.GAMEOVER, new StateBase());
 

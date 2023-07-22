@@ -19,6 +19,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     [SerializeField] float _maxHealth;
 
+    [SerializeField] int _attack;
+
     protected float _currentLife;
 
     [SerializeField] protected float _moveSpeed;
@@ -97,7 +99,10 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
         if(_currentLife <= 0)
         {
+            GameManager.OnEnemyKilled();
+
             this.GetComponent<Rigidbody>().isKinematic = true;
+
             _animBase.PlayAnim(AnimationType.DEAD);
 
             foreach (VisualEffect effect in _effectAsset)
@@ -108,6 +113,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
             _player = null;
 
             _hitFeedback.Emit(30);
+
             Destroy(this.gameObject, 4f);
         }
     }
@@ -130,8 +136,12 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     protected void OnCollisionEnter(Collision collision)
     {
-        
+        IDamageable p = collision.gameObject.GetComponent<IDamageable>();
 
+        if(p != null)
+        {
+            p.DamageOutput(_attack);
+        }
     }
 
 }

@@ -5,6 +5,7 @@ namespace StateMachines
         INITIALIZING,
         START,
         GAMEPLAY,
+        BOSS_BATTLE,
         PAUSE,
         GAMEOVER
     }

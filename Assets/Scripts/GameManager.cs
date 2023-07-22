@@ -6,7 +6,10 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] SO_GameObjects _gameObjects;
+    public static Action OnEnemyKilled;
+
+    [SerializeField] SO_GameObjects _enemies;
+    public SO_GameObjects enemies {get{return _enemies; }}
 
     public static Func<Color> OnChangeColor;
     public static Func<Player> OnFindPlayer;
@@ -19,6 +22,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _timeBetweenEnemieSpawn;
     [SerializeField] bool _canSpawnEnemies;
 
+    [SerializeField] int _enemiesUntilBoss;
+    [SerializeField] int _currentEnemiesKilled;
+    
     public bool CanSpawnEnemies(bool b)
     {
         return _canSpawnEnemies = b;
@@ -38,13 +44,23 @@ public class GameManager : MonoBehaviour
         _colorList.Add(c);
     }
 
+    public void SpawnBoss()
+    {
+        GameObject t = GameObject.FindGameObjectWithTag("BOSS_SPAWN");
+
+        GameObject g = _enemies.boss;
+
+        GameObject temp = Instantiate(g, t.transform.position, Quaternion.identity);
+        DanUtils.MakeScaleAnimation(temp.transform, .5f);
+    }
+
     public void InstantiateObjects()
     {
         try
         {
             GameObject[] t = GameObject.FindGameObjectsWithTag("SPAWN");
 
-            GameObject g = DanUtils.MakeRandomItemList(_gameObjects.gameObjects);
+            GameObject g = DanUtils.MakeRandomItemList(_enemies.enemies);
 
             GameObject spawnPos = DanUtils.MakeRandomItemArray(t);
 
@@ -55,7 +71,7 @@ public class GameManager : MonoBehaviour
         }
         catch
         {
-            GameObject g = DanUtils.MakeRandomItemList(_gameObjects.gameObjects);
+            GameObject g = DanUtils.MakeRandomItemList(_enemies.enemies);
             GameObject temp = Instantiate(g, Vector3.zero, Quaternion.identity);
             DanUtils.MakeScaleAnimation(temp.transform, .5f);
         }  
@@ -102,10 +118,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void KilledEnemies()
+    {
+        _currentEnemiesKilled++;
+
+        if(_currentEnemiesKilled >= _enemiesUntilBoss)
+        {
+            GameplaySateMachine.OnGameStateChange?.Invoke(StateMachines.GameStates.BOSS_BATTLE, this.GetComponent<GameManager>());
+        }
+    }
+
     private void OnEnable()
     {
         OnChangeColor = ChangeColor;
         OnCallObj = InstantiateObjects;
         OnFindPlayer = FindingPlayer;
+        OnEnemyKilled = KilledEnemies;
     }
 }

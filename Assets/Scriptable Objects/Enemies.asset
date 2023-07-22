@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d6b8b5b04541348946241c3ca95b2a, type: 3}
   m_Name: Enemies
   m_EditorClassIdentifier: 
-  _gameObjects:
+  _enemies:
   - {fileID: 8427329454341851222, guid: e35ea95b8fadb8c4681a15bef26df5c8, type: 3}
   - {fileID: 5229361042342118066, guid: f549402d00c1db2459b9568f6e8a2d26, type: 3}
   - {fileID: 5976697113035691990, guid: 8750cfc3366af8549b7c1ba63dc5d2cd, type: 3}
+  _boss: {fileID: 2754790404954725600, guid: 9ea2ceb7274303543b0c825b8e2c65b7, type: 3}

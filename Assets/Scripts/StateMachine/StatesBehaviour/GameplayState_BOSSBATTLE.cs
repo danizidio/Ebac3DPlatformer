@@ -1,20 +1,21 @@
 using StateMachines;
-using System.Collections;
 using UnityEngine;
 
-public class GameplayState_GAMEPLAY : StateBase
+public class GameplayState_BOSSBATTLE : StateBase
 {
     GameManager g;
-
+    
     public override void OnStateEnter(object o = null)
     {
         g = (GameManager)o;
 
-        g.StartCoroutine(g.RoutineSpawnEnemies());
+        g.CanSpawnEnemies(false);
 
-        CameraBehaviour.OnChangeToGamePlayCam?.Invoke();
+        g.SpawnBoss();
 
-        Debug.Log("Entrou do Gameplay");
+        CameraBehaviour.OnChangeToBossCam?.Invoke();
+
+        Debug.Log("Entrou na Boss Battle");
     }
 
     public override void OnStateStay()
@@ -24,7 +25,6 @@ public class GameplayState_GAMEPLAY : StateBase
 
     public override void OnStateExit()
     {
-        Debug.Log("Saiu do Gameplay");
+        Debug.Log("Saiu da Boss Battle");
     }
-
 }

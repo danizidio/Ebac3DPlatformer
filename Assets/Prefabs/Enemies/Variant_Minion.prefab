@@ -289,6 +289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
+      propertyPath: _attack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
       propertyPath: _maxHealth
       value: 2
       objectReference: {fileID: 0}

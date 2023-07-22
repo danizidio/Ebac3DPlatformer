@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
@@ -31,17 +31,17 @@ PrefabInstance:
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 66.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 43.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 200.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
@@ -51,17 +51,17 @@ PrefabInstance:
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 552049370997202166, guid: cc0c8f2d0fef35541b0371b27015e006,
         type: 3}
@@ -118,6 +118,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Variant_Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 8767848817764980286, guid: cc0c8f2d0fef35541b0371b27015e006,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4365701267963633066, guid: cc0c8f2d0fef35541b0371b27015e006, type: 3}
     m_RemovedGameObjects: []
@@ -157,6 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 50
+  _attack: 0
   _moveSpeed: 2
   _flashColor:
     serializedVersion: 2
@@ -168,7 +174,7 @@ MonoBehaviour:
   _effectAsset:
   - {fileID: 7135708423997785043}
   - {fileID: 4571725154027977738}
-  _distanceToAction: 0
+  _distanceToAction: 10
   _shaderProperties:
   - _BaseColor
   - _BottomColor
