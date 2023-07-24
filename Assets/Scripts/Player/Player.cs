@@ -37,12 +37,17 @@ public class Player : MonoBehaviour, IDamageable
     bool _jumped;
     public bool jumped { get { return _jumped; } set { _jumped = value; } }
 
+    float _gravityReaction = 0;
+
+    CharacterController _characterController;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _animBase = GetComponent<AnimationBase>();
         _animBase.SetAnim(this.GetComponentInChildren<Animator>());
         _lifebar = FindAnyObjectByType<PlayerLifebar>();
+        _characterController = GetComponent<CharacterController>();
     }
 
     private void Start()
@@ -58,15 +63,25 @@ public class Player : MonoBehaviour, IDamageable
 
     public Vector3 Moving()
     {
-        Vector3 moveDirection = new Vector3(XAxyz, 0, ZAxyz).normalized;
+        //Vector3 moveDirection = new Vector3(XAxyz, 0, ZAxyz).normalized;
 
-        _rb.MovePosition(_rb.position + moveDirection * _currentSpeed * Time.deltaTime);
-        
-        Vector3 lookDirection = moveDirection + transform.position;
+        //_rb.MovePosition(_rb.position + moveDirection * _currentSpeed * Time.deltaTime);
 
-        transform.LookAt(lookDirection);
+        //Vector3 lookDirection = moveDirection + transform.position;
 
-        return moveDirection;
+        //transform.LookAt(lookDirection);
+
+        // return moveDirection;
+
+        transform.Rotate(0, XAxyz * 50 * Time.deltaTime, 0);
+
+        Vector3 _moveDirection = transform.forward * ZAxyz * _currentSpeed;
+
+        _moveDirection.y = Physics.gravity.y *  500 *  Time.deltaTime;
+
+        _characterController.Move(_moveDirection * Time.deltaTime);
+
+        return _moveDirection;
     }
 
     #region - InputManager Buttons

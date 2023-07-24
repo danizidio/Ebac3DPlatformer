@@ -24,6 +24,8 @@ namespace Animations
 
         [SerializeField] List<AnimationSetup> _animSetups;
 
+        float _defaultAnimSpeed = 1;
+
         //public void PlayerAnimTrigger(AnimationType type)
         //{
         //    var setup = _animSetups.Find(x => x.animType == type);
@@ -68,6 +70,21 @@ namespace Animations
         public Animator GetAnim()
         {
             return _anim;
+        }
+
+        public void SetAnimSpeed(float spd)
+        {
+            _anim.speed = spd;
+        }
+
+        public void SetDefaultAnimSpeed()
+        {
+            _anim.speed = _defaultAnimSpeed;
+        }
+
+        public void SetFloatAnim(string stringParam, float value)
+        {
+            _anim.SetFloat(stringParam, value);
         }
     }
 

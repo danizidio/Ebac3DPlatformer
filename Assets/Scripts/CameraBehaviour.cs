@@ -14,6 +14,8 @@ public class CameraBehaviour : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera[] _cameras;
     [SerializeField] CinemachineFreeLook _freeLook;
 
+    GameObject _player;
+
     [Button]
     public void BossCam()
     {

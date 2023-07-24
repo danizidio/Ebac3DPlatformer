@@ -1,6 +1,7 @@
 using UnityEngine;
 using StateMachines;
 using System;
+using Unity.VisualScripting.FullSerializer;
 
 public class PlayerStatesBehaviour : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class Player_IdleBehaviour : StateBase
 
     public override void OnStateStay()
     {
-        if (_player.Moving() != Vector3.zero && _player.onGround)
+        if (_player.ZAxyz != 0 && _player.onGround)
         {
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.WALKING, _player);
         }
@@ -66,6 +67,7 @@ public class Player_IdleBehaviour : StateBase
 public class Player_WalkingBehaviour : StateBase
 {
     Player _player;
+
     public override void OnStateEnter(object o = null)
     {
         _player = (Player)o;
@@ -74,10 +76,12 @@ public class Player_WalkingBehaviour : StateBase
     }
 
     public override void OnStateStay()
-    {
+    {    
         _player.Moving();
 
-        if(_player.Moving() == Vector3.zero && _player.onGround)
+        _player.animBase.SetFloatAnim("FRONT_BACK", _player.ZAxyz);
+
+        if(_player.ZAxyz == 0 && _player.onGround)
         {
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, _player);
         }
