@@ -13606,7 +13606,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.0,"y":45.0,"z":0.0}'
+      m_SerializableObject: '{"x":0.0,"y":10.0,"z":0.0}'
     m_Space: 2147483647
   m_Property:
     name: Angle
@@ -13804,7 +13804,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.0,"y":25.0,"z":0.0}'
+      m_SerializableObject: '{"x":0.0,"y":10.0,"z":0.0}'
     m_Space: 2147483647
   m_Property:
     name: Angle
@@ -14002,7 +14002,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.0,"y":35.0,"z":0.0}'
+      m_SerializableObject: '{"x":0.0,"y":10.0,"z":0.0}'
     m_Space: 2147483647
   m_Property:
     name: Angle
@@ -14163,8 +14163,7 @@ MonoBehaviour:
   m_UICollapsed: 1
   m_UISuperCollapsed: 0
   title: 
-  m_Owners:
-  - {fileID: 0}
+  m_Owners: []
 --- !u!114 &8926484042661615146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14184,8 +14183,7 @@ MonoBehaviour:
   m_UICollapsed: 1
   m_UISuperCollapsed: 0
   title: 
-  m_Owners:
-  - {fileID: 0}
+  m_Owners: []
   dataType: 0
   capacity: 1
   stripCapacity: 16

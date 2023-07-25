@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] SO_GameObjects _enemies;
     public SO_GameObjects enemies {get{return _enemies; }}
 
+    [SerializeField] GameObject _playerPrefab;
+    GameObject _currentPlayer;
+    public GameObject currentPlayer { get { return _currentPlayer; }}
+
     public static Func<Color> OnChangeColor;
     public static Func<Player> OnFindPlayer;
 
@@ -98,9 +102,22 @@ public class GameManager : MonoBehaviour
 
     Player FindingPlayer()
     {
-        Player temp = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        Player temp = null;
 
-        return temp;
+        try
+        {
+            return _currentPlayer.GetComponent<Player>();
+        }
+        catch
+        {
+            Checkpoint.OnSpawnPlayer?.Invoke();
+
+            return temp = _currentPlayer.GetComponent<Player>();
+        }
+        finally
+        {
+            _currentPlayer = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 
     public IEnumerator RoutineSpawnEnemies()
@@ -126,6 +143,11 @@ public class GameManager : MonoBehaviour
         {
             GameplaySateMachine.OnGameStateChange?.Invoke(StateMachines.GameStates.BOSS_BATTLE, this.GetComponent<GameManager>());
         }
+    }
+
+    public void SpawnPlayer(Vector3 spawnPos)
+    {
+        _currentPlayer = Instantiate(_playerPrefab, spawnPos, Quaternion.identity);
     }
 
     private void OnEnable()
