@@ -55,6 +55,11 @@ public class Player_IdleBehaviour : StateBase
         {
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.JUMPING, _player);
         }
+
+        if(!_player.jumped && !_player.onGround)
+        {
+            PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.FALL, _player);
+        }
     }
 
     public override void OnStateExit()
@@ -77,10 +82,6 @@ public class Player_WalkingBehaviour : StateBase
 
     public override void OnStateStay()
     {    
-        _player.Moving();
-
-        _player.animBase.SetFloatAnim("FRONT_BACK", _player.ZAxyz);
-
         if(_player.ZAxyz == 0 && _player.onGround)
         {
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, _player);
@@ -105,21 +106,28 @@ public class Player_JumpingBehaviour : StateBase
     {
         _player = (Player)o;
         _player.animBase.PlayAnim(Animations.AnimationType.JUMP, true);
+        _player.animBase.PlayAnim(Animations.AnimationType.FALL, true);
         //Debug.Log("entrou no jump");
     }
 
     public override void OnStateStay()
     {
-        _player.Moving();
         //Debug.Log("no ar");
 
-        _player.jumped = false;
+        if (_player.onGround)
+        {
+            //Debug.Log("no chao");
+            _player.jumped = false;
 
-        PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.FALL, _player);
+            PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, _player);
+        }
+
     }
 
     public override void OnStateExit()
     {
+        _player.animBase.GetAnim().ResetTrigger("JUMP");
+        _player.animBase.GetAnim().SetBool(PlayerStates.FALL.ToString(), false);
         //Debug.Log("saiu do jump");
     }
 }
@@ -148,7 +156,7 @@ public class Player_Fall : StateBase
 
     public override void OnStateExit()
     {
-        //Debug.Log("no chão");
+        _player.animBase.GetAnim().SetBool(PlayerStates.FALL.ToString(), false);
     }
 }
 public class Player_AttackingBehaviour : StateBase

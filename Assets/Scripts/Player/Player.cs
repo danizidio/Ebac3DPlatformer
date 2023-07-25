@@ -5,6 +5,8 @@ using System;
 using StateMachines;
 using Animations;
 using NaughtyAttributes;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour, IDamageable
 
     [SerializeField] float _speedbonus;
     float _currentSpeed;
+    [SerializeField] float _rotateSpeed;
 
     [SerializeField] float _currentLife;
 
@@ -37,17 +40,12 @@ public class Player : MonoBehaviour, IDamageable
     bool _jumped;
     public bool jumped { get { return _jumped; } set { _jumped = value; } }
 
-    float _gravityReaction = 0;
-
-    CharacterController _characterController;
-
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _animBase = GetComponent<AnimationBase>();
         _animBase.SetAnim(this.GetComponentInChildren<Animator>());
         _lifebar = FindAnyObjectByType<PlayerLifebar>();
-        _characterController = GetComponent<CharacterController>();
     }
 
     private void Start()
@@ -61,25 +59,20 @@ public class Player : MonoBehaviour, IDamageable
         PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, this);
     }
 
+    private void Update()
+    {
+        Moving();
+    }
+
     public Vector3 Moving()
     {
-        //Vector3 moveDirection = new Vector3(XAxyz, 0, ZAxyz).normalized;
-
-        //_rb.MovePosition(_rb.position + moveDirection * _currentSpeed * Time.deltaTime);
-
-        //Vector3 lookDirection = moveDirection + transform.position;
-
-        //transform.LookAt(lookDirection);
-
-        // return moveDirection;
-
-        transform.Rotate(0, XAxyz * 50 * Time.deltaTime, 0);
+        transform.Rotate(0, XAxyz * _rotateSpeed * Time.deltaTime, 0);
 
         Vector3 _moveDirection = transform.forward * ZAxyz * _currentSpeed;
 
-        _moveDirection.y = Physics.gravity.y *  500 *  Time.deltaTime;
+        _rb.MovePosition(_rb.position + _moveDirection * Time.deltaTime);
 
-        _characterController.Move(_moveDirection * Time.deltaTime);
+        animBase.SetFloatAnim("FRONT_BACK", ZAxyz);
 
         return _moveDirection;
     }
@@ -157,6 +150,11 @@ public class Player : MonoBehaviour, IDamageable
         //ADD CALL TO GAME OVER STATE
     }
 
+    public void AnimEndJump()
+    {
+        jumped = false;
+    }
+
     public void DamageOutput(int damage, Vector3 pullFeedback)
     {
         _currentLife -= damage;
@@ -176,6 +174,16 @@ public class Player : MonoBehaviour, IDamageable
         _animBase.PlayAnim(animationType);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Iinteractible interact = collision.gameObject.GetComponent<Iinteractible>();
+        
+        if(interact != null)
+        {
+            interact.OnInteract();
+        }
+    }
+
     private void OnCollisionStay(Collision collision)
     {
         if(collision.collider.gameObject.layer == LayerMask.NameToLayer("GROUND"))
@@ -183,6 +191,7 @@ public class Player : MonoBehaviour, IDamageable
             _onGround = true;
         }
     }
+
     private void OnCollisionExit(Collision collision)
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("GROUND"))
