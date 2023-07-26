@@ -5,8 +5,6 @@ using System;
 using StateMachines;
 using Animations;
 using NaughtyAttributes;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour, IDamageable
 {

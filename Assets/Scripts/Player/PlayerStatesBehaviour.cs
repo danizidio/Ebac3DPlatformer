@@ -56,8 +56,9 @@ public class Player_IdleBehaviour : StateBase
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.JUMPING, _player);
         }
 
-        if(!_player.jumped && !_player.onGround)
+       if(!_player.jumped && !_player.onGround)
         {
+            Debug.Log("AQUI");
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.FALL, _player);
         }
     }
@@ -128,7 +129,7 @@ public class Player_JumpingBehaviour : StateBase
     {
         _player.animBase.GetAnim().ResetTrigger("JUMP");
         _player.animBase.GetAnim().SetBool(PlayerStates.FALL.ToString(), false);
-        //Debug.Log("saiu do jump");
+        Debug.Log("saiu do jump");
     }
 }
 
@@ -141,22 +142,22 @@ public class Player_Fall : StateBase
 
         _player.animBase.PlayAnim(Animations.AnimationType.FALL, true);
 
-        //Debug.Log("entrou na queda");
+        Debug.Log("entrou na queda");
     }
 
     public override void OnStateStay()
     {
         if (_player.onGround)
         {
-            //Debug.Log("no chao");
-            
+            Debug.Log("no chao");
+            _player.animBase.GetAnim().SetBool(PlayerStates.FALL.ToString(), false);
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, _player);
         }
     }
 
     public override void OnStateExit()
     {
-        _player.animBase.GetAnim().SetBool(PlayerStates.FALL.ToString(), false);
+        Debug.Log("saiu da queda");
     }
 }
 public class Player_AttackingBehaviour : StateBase
