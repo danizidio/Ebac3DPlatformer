@@ -63,6 +63,8 @@ public class GameplayState_START : StateBase
     public override void OnStateEnter(object o = null)
     {
         g = (GameManager)o;
+
+
         //g.CanSpawnEnemies(true);
     }
     public override void OnStateStay()
@@ -81,7 +83,7 @@ public class GameplayState_GAMEPLAY : StateBase
 
         g.StartCoroutine(g.RoutineSpawnEnemies());
 
-        CameraBehaviour.OnChangeToGamePlayCam?.Invoke(g.currentPlayer.gameObject);
+        CameraBehaviour.OnChangeCam?.Invoke(CamType.GAMEPLAY_CAM, g.currentPlayer.gameObject);
 
         //Debug.Log("Entrou do Gameplay");
     }
@@ -159,6 +161,8 @@ public class GameplayState_GAMEOVER : StateBase
         g = (GameManager)o;
 
         Debug.Log("Morreu");
+
+        g.RestartScene();
     }
 
     public override void OnStateStay()

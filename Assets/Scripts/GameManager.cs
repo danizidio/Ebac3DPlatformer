@@ -41,6 +41,13 @@ public class GameManager : MonoBehaviour
         return DanUtils.MakeRandomItemList(_colorList);
     }
 
+    public void RestartScene()
+    {
+        Destroy(_currentPlayer.gameObject);
+
+        GameplaySateMachine.OnGameStateChange?.Invoke(StateMachines.GameStates.INITIALIZING, this.gameObject.GetComponent<GameManager>());
+    }
+
     public void AddRandomColorToList()
     {
         Color c = new Color32((byte)UnityEngine.Random.Range(0, 255),

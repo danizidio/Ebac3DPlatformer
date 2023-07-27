@@ -15,6 +15,10 @@ public class Checkpoint : MonoBehaviour, Iinteractible
 
     [SerializeField] bool _enabled;
 
+    [SerializeField] GameObject _chkpntCam;
+    public GameObject chkpntCam { get { return _chkpntCam; } }
+
+
     private void Start()
     {
         SetParticlesEnable( false);
@@ -50,7 +54,9 @@ public class Checkpoint : MonoBehaviour, Iinteractible
 
     void SpawnPlayer()
     {
-        if(!_enabled) return;
+        if (!_enabled) return;
+
+        CameraBehaviour.OnChangeCam?.Invoke(CamType.CHECKPOINT_CAM, this.gameObject);
 
         _vfxPortal.enabled = true;
 
