@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         _colorList.Add(c);
     }
 
-    public void SpawnBoss()
+    public GameObject SpawnBoss()
     {
         GameObject t = GameObject.FindGameObjectWithTag("BOSS_SPAWN");
 
@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
 
         GameObject temp = Instantiate(g, t.transform.position, Quaternion.identity);
         DanUtils.MakeScaleAnimation(temp.transform, .5f);
+
+        return g;
     }
 
     public void InstantiateObjects()

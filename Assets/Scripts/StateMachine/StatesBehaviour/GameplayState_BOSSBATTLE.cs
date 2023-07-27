@@ -1,30 +1,32 @@
-using StateMachines;
-using UnityEngine;
+//using StateMachines;
+//using UnityEngine;
 
-public class GameplayState_BOSSBATTLE : StateBase
-{
-    GameManager g;
+//public class GameplayState_BOSSBATTLE : StateBase
+//{
+//    GameManager g;
     
-    public override void OnStateEnter(object o = null)
-    {
-        g = (GameManager)o;
+//    public override void OnStateEnter(object o = null)
+//    {
+//        g = (GameManager)o;
 
-        g.CanSpawnEnemies(false);
+//        g.CanSpawnEnemies(false);
 
-        g.SpawnBoss();
+//        GameObject temp = g.SpawnBoss();
 
-        CameraBehaviour.OnChangeToBossCam?.Invoke();
+//        GameObject[] gameObjects = { temp, g.currentPlayer };
 
-        Debug.Log("Entrou na Boss Battle");
-    }
+//        CameraBehaviour.OnChangeToBossCam?.Invoke(gameObjects);
 
-    public override void OnStateStay()
-    {
+//        Debug.Log("Entrou na Boss Battle");
+//    }
 
-    }
+//    public override void OnStateStay()
+//    {
 
-    public override void OnStateExit()
-    {
-        Debug.Log("Saiu da Boss Battle");
-    }
-}
+//    }
+
+//    public override void OnStateExit()
+//    {
+//        Debug.Log("Saiu da Boss Battle");
+//    }
+//}

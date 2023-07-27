@@ -18,8 +18,8 @@ public class GameplaySateMachine : MonoBehaviour
         statemachine.RegisterStates(GameStates.START, new GameplayState_START());
         statemachine.RegisterStates(GameStates.GAMEPLAY, new GameplayState_GAMEPLAY());
         statemachine.RegisterStates(GameStates.BOSS_BATTLE, new GameplayState_BOSSBATTLE());
-        statemachine.RegisterStates(GameStates.PAUSE, new StateBase());
-        statemachine.RegisterStates(GameStates.GAMEOVER, new StateBase());
+        statemachine.RegisterStates(GameStates.PAUSE, new GameplayState_PAUSE());
+        statemachine.RegisterStates(GameStates.GAMEOVER, new GameplayState_GAMEOVER());
 
         OnGameStateChange = statemachine.SwitchState;
     }
@@ -31,5 +31,155 @@ public class GameplaySateMachine : MonoBehaviour
     void Update()
     {
         statemachine.Update();
+    }
+}
+
+public class GameplayState_INITIALIZING : StateBase
+{
+    GameManager g;
+    public override void OnStateEnter(object o = null)
+    {
+        g = (GameManager)o;
+
+        g.CanSpawnEnemies(false);
+    }
+    public override void OnStateStay()
+    {
+        if (GameManager.OnFindPlayer?.Invoke() != null)
+        {
+            GameplaySateMachine.OnGameStateChange?.Invoke(GameStates.START, g);
+        }
+    }
+}
+
+public class GameplayState_START : StateBase
+{
+    GameManager g;
+
+    public override void OnStateEnter(object o = null)
+    {
+        g = (GameManager)o;
+        //g.CanSpawnEnemies(true);
+    }
+    public override void OnStateStay()
+    {
+        GameplaySateMachine.OnGameStateChange?.Invoke(GameStates.GAMEPLAY, g);
+    }
+}
+
+public class GameplayState_GAMEPLAY : StateBase
+{
+    GameManager g;
+
+    public override void OnStateEnter(object o = null)
+    {
+        g = (GameManager)o;
+
+        g.StartCoroutine(g.RoutineSpawnEnemies());
+
+        CameraBehaviour.OnChangeToGamePlayCam?.Invoke(g.currentPlayer);
+
+        //Debug.Log("Entrou do Gameplay");
+    }
+
+    public override void OnStateStay()
+    {
+
+    }
+
+    public override void OnStateExit()
+    {
+        //Debug.Log("Saiu do Gameplay");
+    }
+
+}
+
+public class GameplayState_BOSSBATTLE : StateBase
+{
+    GameManager g;
+
+    public override void OnStateEnter(object o = null)
+    {
+        g = (GameManager)o;
+
+        g.CanSpawnEnemies(false);
+
+        GameObject temp = g.SpawnBoss();
+
+        GameObject[] gameObjects = { temp, g.currentPlayer };
+
+        CameraBehaviour.OnChangeToBossCam?.Invoke(gameObjects);
+
+        Debug.Log("Entrou na Boss Battle");
+    }
+
+    public override void OnStateStay()
+    {
+
+    }
+
+    public override void OnStateExit()
+    {
+        Debug.Log("Saiu da Boss Battle");
+    }
+}
+
+public class GameplayState_PAUSE : StateBase
+{
+    GameManager g;
+
+    public override void OnStateEnter(object o = null)
+    {
+        g = (GameManager)o;
+
+        g.CanSpawnEnemies(false);
+
+        GameObject temp = g.SpawnBoss();
+
+        GameObject[] gameObjects = { temp, g.currentPlayer };
+
+        CameraBehaviour.OnChangeToBossCam?.Invoke(gameObjects);
+
+        Debug.Log("Entrou na Boss Battle");
+    }
+
+    public override void OnStateStay()
+    {
+
+    }
+
+    public override void OnStateExit()
+    {
+        Debug.Log("Saiu da Boss Battle");
+    }
+}
+
+public class GameplayState_GAMEOVER : StateBase
+{
+    GameManager g;
+
+    public override void OnStateEnter(object o = null)
+    {
+        g = (GameManager)o;
+
+        g.CanSpawnEnemies(false);
+
+        GameObject temp = g.SpawnBoss();
+
+        GameObject[] gameObjects = { temp, g.currentPlayer };
+
+        CameraBehaviour.OnChangeToBossCam?.Invoke(gameObjects);
+
+        Debug.Log("Entrou na Boss Battle");
+    }
+
+    public override void OnStateStay()
+    {
+
+    }
+
+    public override void OnStateExit()
+    {
+        Debug.Log("Saiu da Boss Battle");
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace Animations
 {
@@ -25,26 +26,6 @@ namespace Animations
         [SerializeField] List<AnimationSetup> _animSetups;
 
         float _defaultAnimSpeed = 1;
-
-        //public void PlayerAnimTrigger(AnimationType type)
-        //{
-        //    var setup = _animSetups.Find(x => x.animType == type);
-
-        //    if (setup != null)
-        //    {
-        //        _anim.SetTrigger(setup.animType.ToString());
-        //    }
-        //}
-
-        //public void PlayerAnimBool(AnimationType type,Nullable<bool> b)
-        //{
-        //    var setup = _animSetups.Find(x => x.animType == type);
-
-        //    if (setup != null)
-        //    {
-        //        _anim.SetBool(setup.animType.ToString(),b);
-        //    }
-        //}
 
         public void PlayAnim(AnimationType type, Nullable<bool> b = null)
         {

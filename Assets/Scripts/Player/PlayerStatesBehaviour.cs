@@ -40,8 +40,7 @@ public class Player_IdleBehaviour : StateBase
         _player = o as Player;
 
         _player.animBase.PlayAnim(Animations.AnimationType.WALK, false);
-        
-        //Debug.Log("entrou do idle");
+        _player.animBase.PlayAnim(Animations.AnimationType.FALL, false);
     }
 
     public override void OnStateStay()
@@ -51,21 +50,20 @@ public class Player_IdleBehaviour : StateBase
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.WALKING, _player);
         }
 
-        if(_player.jumped)
+        if (_player.jumped)
         {
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.JUMPING, _player);
         }
 
-       if(!_player.jumped && !_player.onGround)
+        if (!_player.onGround)
         {
-            Debug.Log("AQUI");
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.FALL, _player);
         }
     }
 
     public override void OnStateExit()
     {
-        //Debug.Log("saiu do idle");
+
     }
 
 }
@@ -76,9 +74,8 @@ public class Player_WalkingBehaviour : StateBase
 
     public override void OnStateEnter(object o = null)
     {
-        _player = (Player)o;
+        _player = o as Player;
         _player.animBase.PlayAnim(Animations.AnimationType.WALK, true);
-        //Debug.Log("entrou no walk");
     }
 
     public override void OnStateStay()
@@ -97,7 +94,6 @@ public class Player_WalkingBehaviour : StateBase
     public override void OnStateExit()
     {
         _player.animBase.PlayAnim(Animations.AnimationType.WALK, false);
-        //Debug.Log("saiu do walk");
     }
 }
 public class Player_JumpingBehaviour : StateBase
@@ -105,31 +101,23 @@ public class Player_JumpingBehaviour : StateBase
     Player _player;
     public override void OnStateEnter(object o = null)
     {
-        _player = (Player)o;
-        _player.animBase.PlayAnim(Animations.AnimationType.JUMP, true);
+        _player = o as Player;
+        _player.animBase.PlayAnim(Animations.AnimationType.JUMP);
         _player.animBase.PlayAnim(Animations.AnimationType.FALL, true);
-        //Debug.Log("entrou no jump");
     }
 
     public override void OnStateStay()
     {
-        //Debug.Log("no ar");
-
         if (_player.onGround)
         {
-            //Debug.Log("no chao");
-            _player.jumped = false;
-
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, _player);
         }
-
     }
 
     public override void OnStateExit()
     {
-        _player.animBase.GetAnim().ResetTrigger("JUMP");
-        _player.animBase.GetAnim().SetBool(PlayerStates.FALL.ToString(), false);
-        Debug.Log("saiu do jump");
+        _player.jumped = false;
+        _player.animBase.PlayAnim(Animations.AnimationType.FALL, false);
     }
 }
 
@@ -138,26 +126,22 @@ public class Player_Fall : StateBase
     Player _player;
     public override void OnStateEnter(object o = null)
     {
-        _player = (Player)o;
+        _player = o as Player;
 
         _player.animBase.PlayAnim(Animations.AnimationType.FALL, true);
-
-        Debug.Log("entrou na queda");
     }
 
     public override void OnStateStay()
     {
         if (_player.onGround)
-        {
-            Debug.Log("no chao");
-            _player.animBase.GetAnim().SetBool(PlayerStates.FALL.ToString(), false);
+        {            
             PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, _player);
         }
     }
 
     public override void OnStateExit()
     {
-        Debug.Log("saiu da queda");
+        _player.animBase.PlayAnim(Animations.AnimationType.FALL, false);
     }
 }
 public class Player_AttackingBehaviour : StateBase

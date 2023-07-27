@@ -1,30 +1,30 @@
-using StateMachines;
-using System.Collections;
-using UnityEngine;
+//using StateMachines;
+//using System.Collections;
+//using UnityEngine;
 
-public class GameplayState_GAMEPLAY : StateBase
-{
-    GameManager g;
+//public class GameplayState_GAMEPLAY : StateBase
+//{
+//    GameManager g;
 
-    public override void OnStateEnter(object o = null)
-    {
-        g = (GameManager)o;
+//    public override void OnStateEnter(object o = null)
+//    {
+//        g = (GameManager)o;
 
-        g.StartCoroutine(g.RoutineSpawnEnemies());
+//        g.StartCoroutine(g.RoutineSpawnEnemies());
 
-        CameraBehaviour.OnChangeToGamePlayCam?.Invoke();
+//        CameraBehaviour.OnChangeToGamePlayCam?.Invoke(g.currentPlayer);
 
-        Debug.Log("Entrou do Gameplay");
-    }
+//        //Debug.Log("Entrou do Gameplay");
+//    }
 
-    public override void OnStateStay()
-    {
+//    public override void OnStateStay()
+//    {
 
-    }
+//    }
 
-    public override void OnStateExit()
-    {
-        Debug.Log("Saiu do Gameplay");
-    }
+//    public override void OnStateExit()
+//    {
+//        //Debug.Log("Saiu do Gameplay");
+//    }
 
-}
+//}
