@@ -48,24 +48,13 @@ public class Checkpoint : MonoBehaviour, Iinteractible
         return _enabled = active;
     }
 
-   void SpawnPlayer()
+    void SpawnPlayer()
     {
-        if (!_enabled) return;
+        if(!_enabled) return;
 
-        GameManager gm = FindAnyObjectByType<GameManager>();
+        _vfxPortal.enabled = true;
 
-        if (gm != null)
-        {
-            if (gm.currentPlayer == null)
-            {
-                _vfxPortal.enabled = true;
-                gm.SpawnPlayer(_vfxPortal.transform.position);
-            }
-            else
-            {
-                _vfxPortal.enabled = false;
-            }
-        }
+        GameManager.OnInstantiatePlayer?.Invoke(_vfxPortal.transform.position);
     }
 
     void SetActiveCheckPoint()
@@ -84,10 +73,11 @@ public class Checkpoint : MonoBehaviour, Iinteractible
             }
         }
 
+        MessageLog.OnCallMessage?.Invoke("CHECKPOINT");
     }
 
     private void OnEnable()
     {
-        OnSpawnPlayer = SpawnPlayer;
+        OnSpawnPlayer += SpawnPlayer;
     }
 }

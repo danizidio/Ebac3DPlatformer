@@ -8,12 +8,14 @@ public class GameManager : MonoBehaviour
 {
     public static Action OnEnemyKilled;
 
+    public static Action<Vector3> OnInstantiatePlayer;
+
     [SerializeField] SO_GameObjects _enemies;
     public SO_GameObjects enemies {get{return _enemies; }}
 
     [SerializeField] GameObject _playerPrefab;
-    GameObject _currentPlayer;
-    public GameObject currentPlayer { get { return _currentPlayer; }}
+    Player _currentPlayer;
+    public Player currentPlayer { get { return _currentPlayer; }}
 
     public static Func<Color> OnChangeColor;
     public static Func<Player> OnFindPlayer;
@@ -104,22 +106,38 @@ public class GameManager : MonoBehaviour
 
     Player FindingPlayer()
     {
-        Player temp = null;
+        if(_currentPlayer == null)
+        {
+            Checkpoint.OnSpawnPlayer();
+        }
 
-        try
-        {
-            return _currentPlayer.GetComponent<Player>();
-        }
-        catch
-        {
-            Checkpoint.OnSpawnPlayer?.Invoke();
+        return _currentPlayer;
+        //Player temp = null;
 
-            return temp = _currentPlayer.GetComponent<Player>();
-        }
-        finally
-        {
-            _currentPlayer = GameObject.FindGameObjectWithTag("Player");
-        }
+        //Checkpoint.OnSpawnPlayer?.Invoke();
+
+        //if(_currentPlayer != null) temp = _currentPlayer.GetComponent<Player>();
+
+        //return temp;
+
+        //try
+        //{
+        //    print("TRIED");
+
+        //    _currentPlayer = GameObject.FindGameObjectWithTag("Player");
+
+        //    return _currentPlayer.GetComponent<Player>();
+        //}
+        //catch
+        //{
+        //    print("CATCHING");
+
+        //    Checkpoint.OnSpawnPlayer?.Invoke();
+
+        //    if(_currentPlayer != null) temp = _currentPlayer.GetComponent<Player>();
+
+        //    return temp;
+        //}
     }
 
     public IEnumerator RoutineSpawnEnemies()
@@ -147,9 +165,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SpawnPlayer(Vector3 spawnPos)
+     void SpawnPlayer(Vector3 spawnPos)
     {
-        _currentPlayer = Instantiate(_playerPrefab, spawnPos, Quaternion.identity);
+        GameObject temp = Instantiate(_playerPrefab, spawnPos, Quaternion.identity);
+
+        _currentPlayer = temp.GetComponent<Player>();  
     }
 
     private void OnEnable()
@@ -158,5 +178,6 @@ public class GameManager : MonoBehaviour
         OnCallObj = InstantiateObjects;
         OnFindPlayer = FindingPlayer;
         OnEnemyKilled = KilledEnemies;
+        OnInstantiatePlayer = SpawnPlayer;
     }
 }

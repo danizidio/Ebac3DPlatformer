@@ -1,6 +1,7 @@
 using UnityEngine;
 using StateMachines;
 using System;
+using DG.Tweening.Core.Easing;
 
 public class GameplaySateMachine : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class GameplaySateMachine : MonoBehaviour
     {
         OnGameStateChange?.Invoke(GameStates.INITIALIZING, this.gameObject.GetComponent<GameManager>());
     }
+
     void Update()
     {
         statemachine.Update();
@@ -45,7 +47,9 @@ public class GameplayState_INITIALIZING : StateBase
     }
     public override void OnStateStay()
     {
-        if (GameManager.OnFindPlayer?.Invoke() != null)
+        Player temp = GameManager.OnFindPlayer?.Invoke();
+
+        if (temp != null)
         {
             GameplaySateMachine.OnGameStateChange?.Invoke(GameStates.START, g);
         }
@@ -77,7 +81,7 @@ public class GameplayState_GAMEPLAY : StateBase
 
         g.StartCoroutine(g.RoutineSpawnEnemies());
 
-        CameraBehaviour.OnChangeToGamePlayCam?.Invoke(g.currentPlayer);
+        CameraBehaviour.OnChangeToGamePlayCam?.Invoke(g.currentPlayer.gameObject);
 
         //Debug.Log("Entrou do Gameplay");
     }
@@ -106,7 +110,7 @@ public class GameplayState_BOSSBATTLE : StateBase
 
         GameObject temp = g.SpawnBoss();
 
-        GameObject[] gameObjects = { temp, g.currentPlayer };
+        GameObject[] gameObjects = { temp, g.currentPlayer.gameObject };
 
         CameraBehaviour.OnChangeToBossCam?.Invoke(gameObjects);
 
@@ -132,15 +136,7 @@ public class GameplayState_PAUSE : StateBase
     {
         g = (GameManager)o;
 
-        g.CanSpawnEnemies(false);
 
-        GameObject temp = g.SpawnBoss();
-
-        GameObject[] gameObjects = { temp, g.currentPlayer };
-
-        CameraBehaviour.OnChangeToBossCam?.Invoke(gameObjects);
-
-        Debug.Log("Entrou na Boss Battle");
     }
 
     public override void OnStateStay()
@@ -150,7 +146,7 @@ public class GameplayState_PAUSE : StateBase
 
     public override void OnStateExit()
     {
-        Debug.Log("Saiu da Boss Battle");
+        Debug.Log("Saiu do Pause");
     }
 }
 
@@ -162,15 +158,7 @@ public class GameplayState_GAMEOVER : StateBase
     {
         g = (GameManager)o;
 
-        g.CanSpawnEnemies(false);
-
-        GameObject temp = g.SpawnBoss();
-
-        GameObject[] gameObjects = { temp, g.currentPlayer };
-
-        CameraBehaviour.OnChangeToBossCam?.Invoke(gameObjects);
-
-        Debug.Log("Entrou na Boss Battle");
+        Debug.Log("Morreu");
     }
 
     public override void OnStateStay()
@@ -180,6 +168,6 @@ public class GameplayState_GAMEOVER : StateBase
 
     public override void OnStateExit()
     {
-        Debug.Log("Saiu da Boss Battle");
+
     }
 }
