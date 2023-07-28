@@ -176,7 +176,9 @@ public class GameManager : MonoBehaviour
     {
         GameObject temp = Instantiate(_playerPrefab, spawnPos, Quaternion.identity);
 
-        _currentPlayer = temp.GetComponent<Player>();  
+        _currentPlayer = temp.GetComponent<Player>();
+
+        _currentPlayer.gameManager = this;
     }
 
     private void OnEnable()

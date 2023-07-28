@@ -19,8 +19,7 @@ public class SlimeShooter : EnemyBase
 
     private void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
+        StartCoroutine(SearchingPlayer());
     }
 
     private void LateUpdate()

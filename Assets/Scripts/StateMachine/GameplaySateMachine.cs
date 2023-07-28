@@ -83,6 +83,8 @@ public class GameplayState_GAMEPLAY : StateBase
 
         g.StartCoroutine(g.RoutineSpawnEnemies());
 
+        EnemyBase.OnSearchingPlayer?.Invoke();
+
         CameraBehaviour.OnChangeCam?.Invoke(CamType.GAMEPLAY_CAM, g.currentPlayer.gameObject);
 
         //Debug.Log("Entrou do Gameplay");

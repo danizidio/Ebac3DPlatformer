@@ -28,6 +28,9 @@ public class Player : MonoBehaviour, IDamageable
 
     PlayerLifebar _lifebar;
 
+    GameManager _gameManager;
+    public GameManager gameManager { get { return _gameManager; } set { _gameManager = value; } }
+
     float _xAxyz, _zAxyz;
     public float XAxyz { get { return _xAxyz; } set { _xAxyz = value; } }
     public float ZAxyz { get { return _zAxyz; } set { _zAxyz = value; } }
@@ -144,8 +147,8 @@ public class Player : MonoBehaviour, IDamageable
         PlayerAnimation(AnimationType.DEAD);
 
         yield return new WaitForSeconds(2);
-        
-        //ADD CALL TO GAME OVER STATE
+
+        PlayerStatesBehaviour.OnPlayerStateChange(PlayerStates.DEAD, gameManager);
     }
 
     public void AnimEndJump()
@@ -163,7 +166,7 @@ public class Player : MonoBehaviour, IDamageable
 
         if (_currentLife < 1)
         {
-            AnimGameOver();
+            StartCoroutine(AnimGameOver());
         }
     }
 

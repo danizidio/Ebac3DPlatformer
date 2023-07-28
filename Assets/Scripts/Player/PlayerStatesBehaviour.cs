@@ -154,5 +154,9 @@ public class Player_TakingDamageBehaviour : StateBase
 }
 public class Player_DeadBehaviour : StateBase
 {
-
+    public override void OnStateEnter(object o = null)
+    {
+        MessageLog.OnCallMessage("Dead... Respawning!");
+        GameplaySateMachine.OnGameStateChange(GameStates.GAMEOVER, o);
+    }
 }

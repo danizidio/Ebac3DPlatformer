@@ -2,12 +2,15 @@ using Animations;
 using CommonMethodsLibrary;
 using DG.Tweening;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 
 [RequireComponent(typeof(AnimationBase))]
 public class EnemyBase : MonoBehaviour, IDamageable
 {
+    public static Action OnSearchingPlayer;
+
     Rigidbody _rb;
 
     protected Player _player;
@@ -134,6 +137,11 @@ public class EnemyBase : MonoBehaviour, IDamageable
         }
     }
 
+    void SearchPlayer()
+    {
+        StartCoroutine(SearchingPlayer());
+    }
+
     protected void OnCollisionEnter(Collision collision)
     {
         IDamageable p = collision.gameObject.GetComponent<IDamageable>();
@@ -144,4 +152,24 @@ public class EnemyBase : MonoBehaviour, IDamageable
         }
     }
 
+    protected IEnumerator SearchingPlayer()
+    {
+        while (_player == null)
+        {
+            GameObject temp = GameObject.FindGameObjectWithTag("Player");
+
+            if (temp != null)
+            {
+                _player = temp.GetComponent<Player>();
+                StopCoroutine(SearchingPlayer());
+            }
+
+            yield return new WaitForSeconds(.5f);
+        }
+    }
+
+    private void OnEnable()
+    {
+        OnSearchingPlayer += SearchPlayer;
+    }
 }
