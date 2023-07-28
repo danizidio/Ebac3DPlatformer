@@ -29,6 +29,12 @@ namespace CommonMethodsLibrary
             _lifebarRed.color = fullLife;
         }
 
+public void ResetLifeBar() 
+{
+float value = 1;
+_lifebarRed.fillAmount = value;
+} 
+
         public void UpdateLifeBar(float currentLife, float maxLife)
         {
             anim.SetTrigger("HIT");
