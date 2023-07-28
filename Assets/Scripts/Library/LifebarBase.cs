@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace CommonMethodsLibrary
 {
-    public class LifebarBase: MonoBehaviour
+    public class LifebarBase : MonoBehaviour
     {
         public delegate void UpdatingLifeBar(float currentLife, float maxLife);
         public UpdatingLifeBar onUpdateLifeBar;
@@ -29,11 +29,11 @@ namespace CommonMethodsLibrary
             _lifebarRed.color = fullLife;
         }
 
-public void ResetLifeBar() 
-{
-float value = 1;
-_lifebarRed.fillAmount = value;
-} 
+        public void ResetLifeBar()
+        {
+            _lifebarRed.fillAmount = 1;
+            _lifebarRed.color = fullLife;
+        } 
 
         public void UpdateLifeBar(float currentLife, float maxLife)
         {

@@ -57,6 +57,7 @@ public class Player : MonoBehaviour, IDamageable
         _currentLife = _playerAtributes.maxLife;
 
         _lifebar.ResetLifeBar();
+
         PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, this);
     }
 
