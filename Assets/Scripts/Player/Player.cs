@@ -54,9 +54,9 @@ public class Player : MonoBehaviour, IDamageable
         _canMove = true;
 
         _currentSpeed = _playerAtributes.walkSpeed;
-
         _currentLife = _playerAtributes.maxLife;
 
+        _lifebar.ResetLifeBar();
         PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, this);
     }
 
