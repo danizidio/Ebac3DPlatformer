@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.7281011, g: 0.4526115, b: 0.7336169, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6041,7 +6041,7 @@ PrefabInstance:
     - target: {fileID: 4522567847297670205, guid: 8750cfc3366af8549b7c1ba63dc5d2cd,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5976697113035691990, guid: 8750cfc3366af8549b7c1ba63dc5d2cd,
         type: 3}
@@ -6051,12 +6051,12 @@ PrefabInstance:
     - target: {fileID: 5976697113035691990, guid: 8750cfc3366af8549b7c1ba63dc5d2cd,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6297684758167908618, guid: 8750cfc3366af8549b7c1ba63dc5d2cd,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6775,9 +6775,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _volume: {fileID: 832575518}
-  _vignette: {fileID: 1375405588}
   _flashColor: {r: 1, g: 0, b: 0, a: 1}
-  _defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  _defaultVignetteColor: {r: 0, g: 0, b: 0, a: 0}
+  _flashAdj: {r: 1, g: 0.9009434, b: 0.9009434, a: 0}
+  _defaultAdjColor: {r: 0, g: 0, b: 0, a: 0}
   _duration: 0.3
 --- !u!1001 &855513978
 PrefabInstance:
@@ -11324,34 +11325,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1373902241}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1375405588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
-  m_Name: Vignette(Clone)
-  m_EditorClassIdentifier: 
-  active: 1
-  color:
-    m_OverrideState: 1
-    m_Value: {r: 0.061757743, g: 0, b: 0, a: 0.061757743}
-  center:
-    m_OverrideState: 0
-    m_Value: {x: 0.5, y: 0.5}
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.414
-  smoothness:
-    m_OverrideState: 1
-    m_Value: 0.4
-  rounded:
-    m_OverrideState: 0
-    m_Value: 0
 --- !u!1 &1393194105
 GameObject:
   m_ObjectHideFlags: 0

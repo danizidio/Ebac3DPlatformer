@@ -2,44 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-//using UnityEngine.Rendering.PostProcessing;
 using NaughtyAttributes;
 using UnityEngine.Rendering.Universal;
+using System;
 
 public class PostProcessInteractions : MonoBehaviour
 {
+    public static Action<float> OnFlashScreen;
+
     [SerializeField] Volume _volume;
 
-    [SerializeField] Vignette _vignette;
+     Vignette _vignette;
 
-    [SerializeField] Color _flashColor, _defaultColor;
+    ColorAdjustments _colorAdjustments;
+
+    [SerializeField] Color _flashColor, _defaultVignetteColor, _flashAdj, _defaultAdjColor;
 
     [SerializeField] float _duration;
 
-    [Button]
-    public void Flash()
+    float _intensityValue;
+
+    private void Awake()
     {
-        StartCoroutine(FlashVignette());
+        _volume = GetComponent<Volume>();
+
+        Vignette temVignette;
+
+        if (_volume.profile.TryGet(out temVignette))
+        {
+            _vignette = temVignette;
+
+            _intensityValue = _vignette.intensity.value;
+        }
+
+        ColorAdjustments tempCol;
+
+        if (_volume.profile.TryGet(out tempCol))
+        {
+            _colorAdjustments = tempCol;
+
+            _defaultAdjColor = _colorAdjustments.colorFilter.value;
+        }
     }
 
-    IEnumerator FlashVignette()
+    public void Flash(float recovery)
     {
-        Vignette temp;
+        StartCoroutine(FlashVignette(recovery));
+    }
 
-        if(_volume.profile.TryGet<Vignette>(out temp))
-        //if(_volume.profile.TryGetSettings<Vignette>(out temp))
-        {
-            _vignette = temp;
-        }
-        ColorParameter p;
-
-
+    IEnumerator FlashVignette(float recovery)
+    {
         float t = 0;
 
         while(t < _duration)
         {
-            //p.value = Color.Lerp(_defaultColor, _flashColor, t/1);
-            _vignette.color.Override(Color.Lerp(_defaultColor, _flashColor, t / _duration));
+            _vignette.color.Override(Color.Lerp(_defaultVignetteColor, _flashColor, t / _duration));
+
+            _colorAdjustments.colorFilter.Override(Color.Lerp(_defaultAdjColor, _flashAdj, t / _duration));
+
+            _vignette.intensity.Override(_intensityValue + .1f);
+
             t += Time.deltaTime;
 
             yield return new WaitForEndOfFrame();
@@ -49,19 +71,20 @@ public class PostProcessInteractions : MonoBehaviour
 
         while (t < _duration)
         {
-            //p.value = Color.Lerp(_flashColor, _flashColor, t / 1);
             t += Time.deltaTime;
 
-            _vignette.color.Override(Color.Lerp(_flashColor, _defaultColor, t / _duration));
+            _vignette.intensity.Override(_intensityValue + .1f - t);
+
+            _colorAdjustments.colorFilter.Override(Color.Lerp(_flashAdj, _defaultAdjColor, t / _duration));
+
+            _vignette.color.Override(Color.Lerp(_flashColor, _defaultVignetteColor, t / recovery));
 
             yield return new WaitForEndOfFrame();
         }
-        //_vignette.color = p;
+    }
 
-        //yield return new WaitForSeconds(1);
-
-        //p.value = _defaultColor;
-
-        //_vignette.color = p;
+    private void OnEnable()
+    {
+        OnFlashScreen = Flash;
     }
 }

@@ -161,6 +161,8 @@ public class Player : MonoBehaviour, IDamageable
     {
         _currentLife -= damage;
 
+        PostProcessInteractions.OnFlashScreen?.Invoke(.1f);
+
         CameraBehaviour.OnShakeCam(1, 1, .3f);
 
         transform.position -= pullFeedback;
