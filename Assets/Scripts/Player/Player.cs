@@ -161,6 +161,8 @@ public class Player : MonoBehaviour, IDamageable
     {
         _currentLife -= damage;
 
+        CameraBehaviour.OnShakeCam(1, 1, .3f);
+
         transform.position -= pullFeedback;
 
         _lifebar.onUpdateLifeBar?.Invoke(_currentLife, _playerAtributes.maxLife);

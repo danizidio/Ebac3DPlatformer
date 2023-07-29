@@ -76,6 +76,8 @@ public class Player_WalkingBehaviour : StateBase
     {
         _player = o as Player;
         _player.animBase.PlayAnim(Animations.AnimationType.WALK, true);
+
+        CameraBehaviour.OnShakeCam?.Invoke(.1f, .1f, 0);
     }
 
     public override void OnStateStay()
@@ -93,6 +95,8 @@ public class Player_WalkingBehaviour : StateBase
 
     public override void OnStateExit()
     {
+        CameraBehaviour.OnShakeCam?.Invoke(0, 0, 0);
+
         _player.animBase.PlayAnim(Animations.AnimationType.WALK, false);
     }
 }

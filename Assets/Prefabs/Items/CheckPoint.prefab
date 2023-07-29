@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3034389905825437721}
   - component: {fileID: 344676922065520249}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CheckpointCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
