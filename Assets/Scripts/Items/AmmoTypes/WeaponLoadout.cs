@@ -16,7 +16,7 @@ public class WeaponLoadout : MonoBehaviour
 
     private void Start()
     {
-        _currentWeapon = _projectile[0];
+        ChangeWeapon(0);
     }
 
     #region - InputManager Buttons
@@ -40,6 +40,9 @@ public class WeaponLoadout : MonoBehaviour
         {
             _currentSpentAmmo = 0;
             _currentWeapon = _projectile[n];
+
+            WeaponUI.OnChooseWeapon?.Invoke(n);
+
             StartCoroutine(ReloadingCurrentWeapon());
         }
     }
@@ -65,6 +68,10 @@ public class WeaponLoadout : MonoBehaviour
 
                 _currentSpentAmmo++;
 
+                string s = _currentWeapon.GetComponent<AmmoBase>().ammoLimit - _currentSpentAmmo + "/" + _currentWeapon.GetComponent<AmmoBase>().ammoLimit;
+                
+                WeaponUI.OnUpdateAmmo?.Invoke(s);
+
                 if (_currentSpentAmmo >= _currentWeapon.GetComponent<AmmoBase>().ammoLimit)
                 {
                     StopAction();
@@ -82,16 +89,24 @@ public class WeaponLoadout : MonoBehaviour
 
         float t = 0;
 
-        while(_currentSpentAmmo > 0)
+        WeaponUI.OnRealoding?.Invoke(_reloading);
+
+        while (_currentSpentAmmo > 0)
         {
             t += Time.deltaTime;
-            if(t >= _currentWeapon.GetComponent<AmmoBase>().rechargeTime)
+
+            if (t >= _currentWeapon.GetComponent<AmmoBase>().rechargeTime)
             {
                 _currentSpentAmmo--;
                 t = 0;
             }
             yield return new WaitForEndOfFrame();
         }
-            _reloading = false;
+
+        _reloading = false;
+
+        WeaponUI.OnRealoding?.Invoke(_reloading);
+
+        WeaponUI.OnUpdateAmmo?.Invoke(_currentWeapon.GetComponent<AmmoBase>().ammoLimit + "/" + _currentWeapon.GetComponent<AmmoBase>().ammoLimit);
     }
 }
