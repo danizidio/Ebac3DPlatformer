@@ -28,11 +28,6 @@ public class Coins : CollectibleItens
 
         _coinTaken = true;
 
-        Invoke("EndObj", .5f);    
-    }
-
-    void EndObj()
-    {
-        Destroy(gameObject);
+        Destroy(gameObject, 1);
     }
 }
