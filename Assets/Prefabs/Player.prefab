@@ -303,6 +303,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 111a5297-06d5-4635-aaa4-a48f8c4d7e6c
     m_ActionName: Player/Weapon3[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2865833941154189488}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnUsingItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8f116e26-6873-4a55-b594-e4c7e49990cf
+    m_ActionName: Player/UseItem[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

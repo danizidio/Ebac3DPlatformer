@@ -128,6 +128,19 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public void OnUsingItem(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            if(_currentLife < _playerAtributes.maxLife && Inventory.OnVerifyStock(CollectibleTypes.COLLECTIBLE_HEALTHPACK))
+            {
+                _currentLife += 4;
+
+                _lifebar.onUpdateLifeBar?.Invoke(_currentLife, _playerAtributes.maxLife);
+            }
+        }
+    }
+
     #endregion
 
     public void Jumping()
