@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class Coins : CollectibleItens
+public class Item : CollectibleItens
 {
     [SerializeField] bool _coinTaken;
     Vector3 _playerPos;
@@ -14,7 +14,7 @@ public class Coins : CollectibleItens
     {
         if(_coinTaken)
         {
-            transform.position = Vector3.Lerp(transform.position, _playerPos, 5 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _playerPos, 5 * Time.deltaTime);
         }
     }
 
