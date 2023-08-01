@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1068815584624478774}
   - component: {fileID: 692984450633123686}
   - component: {fileID: 7920847379556782492}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ VisualEffect:
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 2d45ef00f25112645af2e88b6015c3cf, type: 3}
   m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
@@ -136,8 +136,8 @@ VFXRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1341896625
+  m_SortingLayer: 1
   m_SortingOrder: 0
 --- !u!1 &5901048087889150302
 GameObject:
@@ -172,7 +172,7 @@ Transform:
   m_Children:
   - {fileID: 1068815584624478774}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4194558331558848127
 Rigidbody:
@@ -235,5 +235,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
-  _coinTakeFX: {fileID: 2784247346059300082}
   _coinTaken: 0
+  _coinTakeFX: {fileID: 2784247346059300082}

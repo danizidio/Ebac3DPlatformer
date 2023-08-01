@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 414576453037713340}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7428828816862302989
 Rigidbody:
@@ -95,8 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa46523587bbc0848827c1526e9050fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinTakeFX: {fileID: 5631676637255073934}
+  _type: 0
   _coinTaken: 0
+  _coinTakeFX: {fileID: 5631676637255073934}
 --- !u!1 &5631676637255073934
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +109,7 @@ GameObject:
   - component: {fileID: 414576453037713340}
   - component: {fileID: 3117584290512585996}
   - component: {fileID: 564693046441343056}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Coins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,6 +225,6 @@ VFXRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1341896625
+  m_SortingLayer: 1
   m_SortingOrder: 0

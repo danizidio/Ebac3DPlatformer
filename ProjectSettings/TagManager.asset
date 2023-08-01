@@ -44,6 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: INTERACTIBLE_ITEMS
+    uniqueID: 1341896625
+    locked: 0
   - name: UI
     uniqueID: 1676489035
     locked: 0

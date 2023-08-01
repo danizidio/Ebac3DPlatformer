@@ -5,10 +5,15 @@ using System;
 using StateMachines;
 using Animations;
 using NaughtyAttributes;
+using static Player;
 
 public class Player : MonoBehaviour, IDamageable
 {
     public event Action OnPausing;
+
+    public delegate void onInteracting();
+    public onInteracting OnInteracting;
+
 
     [SerializeField] SO_Actors _playerAtributes;
 
@@ -138,6 +143,14 @@ public class Player : MonoBehaviour, IDamageable
 
                 _lifebar.onUpdateLifeBar?.Invoke(_currentLife, _playerAtributes.maxLife);
             }
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            OnInteracting?.Invoke();
         }
     }
 

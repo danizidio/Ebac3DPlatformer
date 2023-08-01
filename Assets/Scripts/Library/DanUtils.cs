@@ -13,7 +13,7 @@ namespace CommonMethodsLibrary
             if (changePrefabSize)
             {
                 t.transform.localScale = Vector3.zero;
-                return t.transform.DOScale(desirableSize, time);
+                return t.transform.DOScale(desirableSize, time).SetEase(Ease.OutBack);
             }
             else
             {

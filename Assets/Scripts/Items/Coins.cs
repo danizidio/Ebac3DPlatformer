@@ -1,19 +1,15 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Coins : CollectibleItens
 {
     [SerializeField] bool _coinTaken;
     Vector3 _playerPos;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        p = other.GetComponentInParent<Player>();
-        _playerPos = other.transform.position;
+    [SerializeField] GameObject _coinTakeFX;
 
-        if (p == null) return;
+    Player _p;
 
-        CollectedItem();
-    }
     private void FixedUpdate()
     {
         if(_coinTaken)
@@ -22,9 +18,21 @@ public class Coins : CollectibleItens
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        _p = other.GetComponentInParent<Player>();
+        _playerPos = other.transform.position;
+
+        if (_p == null) return;
+
+        CollectedItem();
+    }
+
     protected override void CollectedItem()
     {
-        base.CollectedItem();
+        _coinTakeFX.GetComponent<VisualEffect>().SetBool("Taken", true);
+
+        Inventory.OnCollectItem?.Invoke(type);
 
         _coinTaken = true;
 
