@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 579516739409107725}
   - component: {fileID: 6713405902741795842}
   - component: {fileID: 2147950172726793638}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 6112370473216908307}
   - component: {fileID: 4227807335915934201}
   - component: {fileID: 463317541909408081}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 5092348955273054673}
   - component: {fileID: 8641309265129382332}
   - component: {fileID: 292738400646386567}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Breakable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ Transform:
   - {fileID: 8581693941376093863}
   - {fileID: 579516739409107725}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5092348955273054673
 Rigidbody:
@@ -325,6 +325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HitSpark
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643443718275474394, guid: 097c0c48025fc11459281866d5041142,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5005934809103310752, guid: 097c0c48025fc11459281866d5041142,
         type: 3}
@@ -436,10 +441,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flame
       objectReference: {fileID: 0}
+    - target: {fileID: 3900752257150104554, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 3900752257150104555, guid: 363cc45005727234582ab38e191c1f8a,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900752257150104555, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900752257150104555, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3900752257150104555, guid: 363cc45005727234582ab38e191c1f8a,
         type: 3}
@@ -490,6 +510,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900752257552477032, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Value
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900752257552477032, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900752257552477032, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900752257552477032, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900752257552477032, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900752257552477032, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900752257552477032, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[4].m_Value.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900752257552477045, guid: 363cc45005727234582ab38e191c1f8a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -44,6 +44,11 @@ public class BreakableObject : MonoBehaviour, IDamageable
             {
                 DropItems();
             }
+
+            GetComponent<Rigidbody>().isKinematic = true;
+            GetComponent<BoxCollider>().enabled = false;
+
+            StartCoroutine(Dissolving());
         }
     }
 
@@ -55,5 +60,23 @@ public class BreakableObject : MonoBehaviour, IDamageable
                                                                                                    Random.Range(-1, 1)), 
                                                                                                    ForceMode.Impulse);
 
+    }
+
+    IEnumerator Dissolving()
+    {
+        float t = 1;
+
+        while (t >= 0)
+        {
+            t -= Time.deltaTime/5;
+
+            _objMesh.GetComponent<MeshRenderer>().material.SetFloat("_Fade", t);
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        Destroy(this.gameObject);
+
+        yield return null;
     }
 }
