@@ -2,17 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakableObject : MonoBehaviour
+public class BreakableObject : IDamageable
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float _objLife;
+
+    [SerializeField] GameObject _objMesh;
+
+    [SerializeField] GameObject[] _possibleDrops;
+
+    [SerializeField] float _minItems, _maxItems;
+
+    void DamageOutput(int dmg, Vector3 pullFeedback)
     {
-        
+        _objLife -= dmg;
+
+        if(_objLife <= 0)
+        {
+            _objMesh.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void DropItems()
     {
-        
+        float v = Random.Range(_minItems,_maxItems);
+
     }
 }
