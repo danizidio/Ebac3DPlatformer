@@ -220,7 +220,7 @@ MonoBehaviour:
     x: -64
     y: -337
     width: 2214
-    height: 3279
+    height: 3294
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9328,7 +9328,7 @@ MonoBehaviour:
     position: {x: 1266, y: 1910}
     expandedSlots:
     - {fileID: 8926484042661614880}
-    expanded: 1
+    expanded: 0
 --- !u!114 &8926484042661614880
 MonoBehaviour:
   m_ObjectHideFlags: 0
