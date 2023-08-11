@@ -81,7 +81,7 @@ MonoBehaviour:
       x: 1529
       y: -226
       width: 913
-      height: 2095
+      height: 2081
     contents:
     - model: {fileID: 8926484042661614634}
       id: 2
@@ -441,7 +441,7 @@ MonoBehaviour:
     x: 219
     y: -277
     width: 4506
-    height: 4394
+    height: 4380
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1

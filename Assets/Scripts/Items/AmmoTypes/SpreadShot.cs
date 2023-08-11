@@ -5,7 +5,10 @@ public class SpreadShot : AmmoBase
 {
     [Space(10)]
     [SerializeField] int _ammountPerShot;
+    public int ammountPerShot { get { return _ammountPerShot; } }
+
     [SerializeField] float _angle;
+    public float angle { get { return _angle; } }   
 
     protected override void Shot(GameObject g, Transform t)
     {

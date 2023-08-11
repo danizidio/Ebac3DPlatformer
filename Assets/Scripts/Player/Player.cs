@@ -25,7 +25,11 @@ public class Player : MonoBehaviour, IDamageable
     bool _canMove;
     public bool canMove { get { return _canMove; } }
 
-    [SerializeField] float _speedbonus;
+    [SerializeField] float _runingSpeed;
+    
+    float _bonusSpeed = 0;
+    public float bonusSpeed { get { return _bonusSpeed; } set { _bonusSpeed = value; } }
+
     float _currentSpeed;
     [SerializeField] float _rotateSpeed;
 
@@ -75,7 +79,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         transform.Rotate(0, XAxyz * _rotateSpeed * Time.deltaTime, 0);
 
-        Vector3 _moveDirection = transform.forward * ZAxyz * _currentSpeed;
+        Vector3 _moveDirection = transform.forward * ZAxyz * (_currentSpeed + bonusSpeed);
 
         _rb.MovePosition(_rb.position + _moveDirection * Time.deltaTime);
 
@@ -107,7 +111,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             if(context.performed)
             {
-                _currentSpeed = _playerAtributes.walkSpeed * _speedbonus;
+                _currentSpeed = _playerAtributes.walkSpeed * _runingSpeed;
                 _animBase.GetAnim().speed = 1.5f;
             }
             if (context.canceled)
