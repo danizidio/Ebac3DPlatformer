@@ -6,8 +6,11 @@ using System;
 
 public class ChangeScene : Timer
 {
-    public delegate void _onChangeScene(string sceneName);
-    public static _onChangeScene OnChangeScene;
+    public delegate void _onChangeSceneByName(string sceneName);
+    public static _onChangeSceneByName OnChangeSceneByName;
+
+    public delegate void _onChangeSceneByIndex(int sceneIndex);
+    public static _onChangeSceneByIndex OnChangeSceneByIndex;
 
     public static Action OnReloadScene;
 
@@ -32,18 +35,28 @@ public class ChangeScene : Timer
             timer = 0;
         }
 
-        SetTimer(timer, () => StartCoroutine(LoadingNextScene(_nextSceneName)));
+        SetTimer(timer, () => StartCoroutine(LoadingNextSceneByName(_nextSceneName)));
     }
 
     public void ReloadScene()
     {
-        StartCoroutine(LoadingNextScene(_nextSceneName));
+        StartCoroutine(LoadingNextSceneByName(_nextSceneName));
     }
 
     //BUTTON METHOD
-    public void SelectingNextScene(string sceneName)
+    public void SelectingNextSceneByName(string sceneName)
     {
-        StartCoroutine(LoadingNextScene(sceneName));
+        StartCoroutine(LoadingNextSceneByName(sceneName));
+    }
+
+    public void SelectingNextSceneByIndex(int sceneIndex)
+    {
+        StartCoroutine(LoadingNextSceneByIndex(sceneIndex));
+    }
+
+    public void LoadingPlayerProgressStage()
+    {
+        StartCoroutine(LoadingNextSceneByIndex(SaveManager.Instance.saveGame.lastStage + 1));
     }
 
     //BUTTON METHOD
@@ -52,7 +65,7 @@ public class ChangeScene : Timer
         Application.Quit();
     }
 
-    public IEnumerator LoadingNextScene(string sceneName)
+    public IEnumerator LoadingNextSceneByName(string sceneName)
     {
         yield return new WaitForSeconds(2);
 
@@ -66,13 +79,28 @@ public class ChangeScene : Timer
         }
     }
 
+    public IEnumerator LoadingNextSceneByIndex(int sceneIndex)
+    {
+        yield return new WaitForSeconds(2);
+
+        AsyncOperation loading = SceneManager.LoadSceneAsync(sceneIndex);
+
+        while (!loading.isDone)
+        {
+            //ANIMACAO PARA LOADING
+
+            yield return null;
+        }
+    }
     private void OnEnable()
     {
-        OnChangeScene += SelectingNextScene;
+        OnChangeSceneByName += SelectingNextSceneByName;
+        OnChangeSceneByIndex += SelectingNextSceneByIndex;
         OnReloadScene = ReloadScene;
     }
     private void OnDisable()
     {
-        OnChangeScene -= SelectingNextScene;
+        OnChangeSceneByName -= SelectingNextSceneByName;
+        OnChangeSceneByIndex -= SelectingNextSceneByIndex;
     }
 }

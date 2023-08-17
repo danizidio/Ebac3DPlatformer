@@ -1,6 +1,4 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,6 +6,7 @@ public enum ButtonTypes
 {
     NULL,
     PLAY,
+    LOAD,
     PAUSE,
     MENU,
     ABOUT,
@@ -45,6 +44,9 @@ public class ButtonsBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExi
         switch (_typeBtn)   
         {
             case ButtonTypes.PLAY:
+                MainMenuBehaviour.Instance.ShowMenu(MenuPieces.MAIN, typeBtn);
+                break;
+            case ButtonTypes.LOAD:
                 MainMenuBehaviour.Instance.ShowMenu(MenuPieces.MAIN, typeBtn);
                 break;
             case ButtonTypes.PAUSE:

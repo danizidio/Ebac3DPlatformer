@@ -3,11 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
-using NaughtyAttributes;
+
+public enum Checkpoints
+{
+    POINT_A,
+    POINT_B,
+    POINT_C,
+    POINT_D
+}
 
 public class Checkpoint : MonoBehaviour, Iinteractible
 {
     public static Action OnSpawnPlayer;
+
+    [SerializeField] Checkpoints _checkpoint;
 
     [SerializeField] List<VisualEffect> _vfxParticles;
 
@@ -54,7 +63,7 @@ public class Checkpoint : MonoBehaviour, Iinteractible
 
     void SpawnPlayer()
     {
-        if (!_enabled) return;
+        if (_checkpoint != SaveManager.Instance.saveGame.checkpoints) return;
 
         CameraBehaviour.OnChangeCam?.Invoke(CamType.CHECKPOINT_CAM, this.gameObject);
 
@@ -78,6 +87,8 @@ public class Checkpoint : MonoBehaviour, Iinteractible
                 checkpoint.IsActive(false);
             }
         }
+
+        SaveManager.Instance.SetCheckPoint(_checkpoint);
 
         MessageLog.OnCallMessage?.Invoke("CHECKPOINT");
     }
