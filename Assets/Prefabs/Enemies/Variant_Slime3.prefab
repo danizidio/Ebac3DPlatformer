@@ -247,6 +247,7 @@ MonoBehaviour:
   _effectAsset:
   - {fileID: 1714926005069924581}
   - {fileID: 5456536265848354620}
+  _distanceToWalk: 200
   _distanceToAction: 30
   _shootPivot: {fileID: 4326015629264435989}
   _projectile: {fileID: 5297028576246425358, guid: 3fc2e257a34aaf44cb10f2124641103c,

@@ -15,7 +15,7 @@ public class SlimeSimple : EnemyBase
 
     private void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        StartCoroutine(SearchingPlayer());
     }
 
     private void LateUpdate()
@@ -38,10 +38,14 @@ public class SlimeSimple : EnemyBase
                 StopCoroutine(_coroutine);
                 _coroutine = null;
             }
-            transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, _moveSpeed * Time.deltaTime);
-            animBase.PlayAnim(Animations.AnimationType.WALK);
+            if (_currentDistance <= _distanceToWalk)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, _moveSpeed * Time.deltaTime);
+                animBase.PlayAnim(Animations.AnimationType.WALK);
+            }
         }
     }
+
 
     IEnumerator Attack()
     {

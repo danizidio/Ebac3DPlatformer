@@ -42,6 +42,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] ParticleSystem _hitFeedback;
     [SerializeField] VisualEffect[] _effectAsset;
 
+    [SerializeField] protected float _distanceToWalk;
     [SerializeField] float _distanceToAction;
     protected float _currentDistance;
 
