@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -12,10 +11,13 @@ public class Inventory : MonoBehaviour
     public delegate bool onVerifyStock(CollectibleTypes t);
     public static onVerifyStock OnVerifyStock;
 
+    public static Action OnSaveInventory;
+
     [SerializeField] List<Collectibles> _collectibles;
 
     private void Start()
     {
+        LoadInventory();
         UpdateInterfaceValues();
     }
 
@@ -59,10 +61,41 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
+    void LoadInventory()
+    {
+        foreach (Collectibles collectible in _collectibles)
+        {
+            if (collectible.collectible.type == CollectibleTypes.COLLECTIBLE_COIN)
+            {
+                collectible.collectible.count = SaveManager.Instance.saveGame.coinsTaken;
+            }
+            if (collectible.collectible.type == CollectibleTypes.COLLECTIBLE_HEALTHPACK)
+            {
+                collectible.collectible.count = SaveManager.Instance.saveGame.medPacks;
+            }
+        }
+    }
+
+    void SaveInventory()
+    {
+        foreach (Collectibles collectible in _collectibles)
+        {
+            if (collectible.collectible.type == CollectibleTypes.COLLECTIBLE_COIN)
+            {
+                SaveManager.Instance.SaveInventory(CollectibleTypes.COLLECTIBLE_COIN, collectible.collectible.count);
+            }
+            if (collectible.collectible.type == CollectibleTypes.COLLECTIBLE_HEALTHPACK)
+            {
+                SaveManager.Instance.SaveInventory(CollectibleTypes.COLLECTIBLE_HEALTHPACK, collectible.collectible.count);
+            }
+        }
+    }
+
     private void OnEnable()
     {
         OnCollectItem = CollectItem;
         OnVerifyStock = CheckItem;
+        OnSaveInventory = SaveInventory;
     }
 }
 

@@ -8,6 +8,7 @@ public class TouchOfDeath : MonoBehaviour
 
         if (p != null)
         {
+            print("touch");
             StartCoroutine(p.AnimGameOver());
         }
     }

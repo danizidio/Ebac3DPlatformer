@@ -34,6 +34,25 @@ public class SaveManager : Singleton<SaveManager>
         Save();
     }
 
+    public void SaveInventory(CollectibleTypes type, int quantity)
+    {
+        switch (type)
+        {
+            case CollectibleTypes.COLLECTIBLE_COIN:
+                {
+                    _saveGame.coinsTaken = quantity;
+                    break;
+                }
+            case CollectibleTypes.COLLECTIBLE_HEALTHPACK:
+                {
+                    _saveGame.medPacks = quantity;
+                    break;
+                }
+        }
+
+        Save();
+    }
+
     void Save()
     {
         string json = JsonUtility.ToJson(_saveGame);

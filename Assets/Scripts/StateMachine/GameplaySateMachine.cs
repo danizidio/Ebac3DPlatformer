@@ -21,6 +21,7 @@ public class GameplaySateMachine : MonoBehaviour
         statemachine.RegisterStates(GameStates.BOSS_BATTLE, new GameplayState_BOSSBATTLE());
         statemachine.RegisterStates(GameStates.PAUSE, new GameplayState_PAUSE());
         statemachine.RegisterStates(GameStates.GAMEOVER, new GameplayState_GAMEOVER());
+        statemachine.RegisterStates(GameStates.VICTORY, new GameplayState_VICTORY());
 
         OnGameStateChange = statemachine.SwitchState;
     }
@@ -162,9 +163,31 @@ public class GameplayState_GAMEOVER : StateBase
     {
         g = (GameManager)o;
 
-        Debug.Log("Morreu");
+        Inventory.OnSaveInventory?.Invoke();
 
         g.RestartScene();
+    }
+
+    public override void OnStateStay()
+    {
+
+    }
+
+    public override void OnStateExit()
+    {
+
+    }
+}
+public class GameplayState_VICTORY : StateBase
+{
+    GameManager g;
+
+    public override void OnStateEnter(object o = null)
+    {
+        g = (GameManager)o;
+
+        Inventory.OnSaveInventory?.Invoke();
+
     }
 
     public override void OnStateStay()

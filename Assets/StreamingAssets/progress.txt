@@ -1,1 +1,1 @@
-{"_lastStage":0,"_coinsTaken":0,"_medPaks":0,"_score":0.0,"_checkpoints":1}
+{"_lastStage":0,"_coinsTaken":0,"_medPaks":0,"_score":0.0,"_checkpoints":0}

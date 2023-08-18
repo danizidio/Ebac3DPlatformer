@@ -7,6 +7,7 @@ namespace StateMachines
         GAMEPLAY,
         BOSS_BATTLE,
         PAUSE,
-        GAMEOVER
+        GAMEOVER,
+        VICTORY
     }
 }

@@ -119,32 +119,6 @@ public class GameManager : MonoBehaviour
         }
 
         return _currentPlayer;
-        //Player temp = null;
-
-        //Checkpoint.OnSpawnPlayer?.Invoke();
-
-        //if(_currentPlayer != null) temp = _currentPlayer.GetComponent<Player>();
-
-        //return temp;
-
-        //try
-        //{
-        //    print("TRIED");
-
-        //    _currentPlayer = GameObject.FindGameObjectWithTag("Player");
-
-        //    return _currentPlayer.GetComponent<Player>();
-        //}
-        //catch
-        //{
-        //    print("CATCHING");
-
-        //    Checkpoint.OnSpawnPlayer?.Invoke();
-
-        //    if(_currentPlayer != null) temp = _currentPlayer.GetComponent<Player>();
-
-        //    return temp;
-        //}
     }
 
     public IEnumerator RoutineSpawnEnemies()
