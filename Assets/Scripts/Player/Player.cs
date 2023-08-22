@@ -23,7 +23,7 @@ public class Player : MonoBehaviour, IDamageable
     public AnimationBase animBase { get { return _animBase; } }
 
     bool _canMove;
-    public bool canMove { get { return _canMove; } }
+    public bool canMove { get { return _canMove; }set { _canMove = value; } }
 
     [SerializeField] float _runingSpeed;
     

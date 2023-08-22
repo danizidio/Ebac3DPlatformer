@@ -184,7 +184,7 @@ public class GameplayState_VICTORY : StateBase
 
     public override void OnStateEnter(object o = null)
     {
-        g = (GameManager)o;
+       //g = (GameManager)o;
 
         Inventory.OnSaveInventory?.Invoke();
 
