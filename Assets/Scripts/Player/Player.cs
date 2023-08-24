@@ -23,7 +23,7 @@ public class Player : MonoBehaviour, IDamageable
     public AnimationBase animBase { get { return _animBase; } }
 
     bool _canMove;
-    public bool canMove { get { return _canMove; }set { _canMove = value; } }
+    public bool canMove { get { return _canMove; } }
 
     [SerializeField] float _runingSpeed;
     
@@ -169,6 +169,14 @@ public class Player : MonoBehaviour, IDamageable
     public bool CanMove(bool b)
     {
         return _canMove = b;
+    }
+
+    public void ForceStop()
+    {
+        XAxyz = 0;
+        ZAxyz = 0;
+        _canMove = false;
+        PlayerStatesBehaviour.OnPlayerStateChange?.Invoke(PlayerStates.IDLE, this);
     }
 
     public IEnumerator AnimGameOver()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class RocketBehaviour : MonoBehaviour
 {
@@ -16,15 +17,28 @@ public class RocketBehaviour : MonoBehaviour
         }
     }
 
+    [Button]
+    public void ForceWin()
+    {
+        CameraBehaviour.OnChangeCam?.Invoke(CamType.VICTORY_CAM, _rocket);
+
+        _levelFinished = true;
+
+        GameplaySateMachine.OnGameStateChange(StateMachines.GameStates.VICTORY, null);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Player p = other.GetComponent<Player>();
 
         if(p != null )
         {
-            p.canMove = false;
-
-            p.transform.SetParent(this.transform);
+            CameraBehaviour.OnChangeCam?.Invoke(CamType.VICTORY_CAM, _rocket);
+            p.transform.SetParent(_rocket.transform);
+            p.transform.localPosition = Vector3.zero;
+            p.ForceStop();
+            p.GetComponent<Rigidbody>().isKinematic = true;
+            p.enabled = false;
 
             _levelFinished = true;
 

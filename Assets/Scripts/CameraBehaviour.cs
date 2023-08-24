@@ -8,9 +8,10 @@ using NaughtyAttributes;
 
 public enum CamType
 {
-    GAMEPLAY_CAM
-   , CHECKPOINT_CAM
-   , BOSS_CAM
+   GAMEPLAY_CAM,
+   CHECKPOINT_CAM,
+   VICTORY_CAM,
+   BOSS_CAM
 }
 
 public class CameraBehaviour : MonoBehaviour
@@ -83,8 +84,20 @@ public class CameraBehaviour : MonoBehaviour
                     _chkpntCam.Follow = objFocus.transform;
 
                     _cameras[0].Priority = 0;
+                    _cameras[2].Priority = 0;
                     _freeLook.Priority = 0;
                     _chkpntCam.Priority = 1;
+
+                    break;
+                }
+            case CamType.VICTORY_CAM:
+                {
+                    _cameras[2].Priority = 1;
+                    _cameras[2].LookAt = objFocus.transform;
+
+                    _cameras[0].Priority = 0;
+                    _cameras[1].Priority = 0;
+                    _freeLook.Priority = 0;
 
                     break;
                 }
@@ -97,6 +110,7 @@ public class CameraBehaviour : MonoBehaviour
         _cameras[1].LookAt = objFocus.transform;
         _cameras[1].Priority = 1;
         _cameras[0].Priority = 0;
+        _cameras[2].Priority = 0;
         _freeLook.Priority = 0;
         _chkpntCam.Priority = 0;
 
@@ -108,6 +122,7 @@ public class CameraBehaviour : MonoBehaviour
         _freeLook.LookAt = objFocus.transform;
 
         _cameras[0].Priority = 0;
+        _cameras[2].Priority = 0;
         _freeLook.Priority = 1;
         _chkpntCam.Priority = 0;
 
