@@ -188,6 +188,13 @@ public class GameplayState_VICTORY : StateBase
 
         Inventory.OnSaveInventory?.Invoke();
 
+        SaveManager.Instance.StageCleared();
+
+        SaveManager.Instance.SetCheckPoint(Checkpoints.POINT_A);
+
+        VictoryText.OnFinishLevel?.Invoke();
+
+        ChangeScene.OnChangeSceneByIndex?.Invoke(SaveManager.Instance.saveGame.lastStage + 1);
     }
 
     public override void OnStateStay()

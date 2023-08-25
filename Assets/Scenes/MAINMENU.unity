@@ -867,7 +867,6 @@ GameObject:
   m_Component:
   - component: {fileID: 436229165}
   - component: {fileID: 436229166}
-  - component: {fileID: 436229167}
   m_Layer: 0
   m_Name: MenuBehaviour
   m_TagString: Untagged
@@ -910,22 +909,6 @@ MonoBehaviour:
   - {fileID: 1069039881}
   - {fileID: 836851296}
   _aboutSession: {fileID: 526825246}
---- !u!114 &436229167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436229164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6445c0e9cff1e045b0e278adefc2ee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timer: 0
-  _useTimer: 0
-  _automaticSceneChange: 0
-  _nextSceneName: GAMEPLAY
 --- !u!1 &459656499
 GameObject:
   m_ObjectHideFlags: 0
@@ -11434,7 +11417,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 436229167}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
@@ -12686,7 +12669,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 436229167}
+      - m_Target: {fileID: 1633824225078519276}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: LoadingPlayerProgressStage
         m_Mode: 1
@@ -13239,7 +13222,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 436229167}
+      - m_Target: {fileID: 1633824225078519276}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: SelectingNextSceneByIndex
         m_Mode: 3
@@ -13442,6 +13425,12 @@ SpriteShapeRenderer:
     m_Center: {x: 11.891609, y: 1.3867385, z: 0}
     m_Extent: {x: 113.00081, y: 3.6211388, z: 0}
   m_SpriteSortPoint: 0
+--- !u!1 &1219859194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1044678568119443053, guid: eef0463d68cffae4ba302fbae694f87b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1633824225078519273}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1233842583
 GameObject:
   m_ObjectHideFlags: 0
@@ -15834,7 +15823,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1044678568119443053, guid: eef0463d68cffae4ba302fbae694f87b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1633824225078519276}
   m_SourcePrefab: {fileID: 100100000, guid: eef0463d68cffae4ba302fbae694f87b, type: 3}
 --- !u!114 &1633824225078519274 stripped
 MonoBehaviour:
@@ -15842,12 +15835,28 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1633824225078519273}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1219859194}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 212415b5e0a5a2d458f82ebc1113eeb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1633824225078519276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219859194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6445c0e9cff1e045b0e278adefc2ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timer: 0
+  _useTimer: 0
+  _automaticSceneChange: 0
+  _nextSceneName: GAMEPLAY
 --- !u!1001 &3599279343249421192
 PrefabInstance:
   m_ObjectHideFlags: 0

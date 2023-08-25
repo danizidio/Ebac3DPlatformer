@@ -25,11 +25,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<Color> _colorList;
     public List<Color> colorList { get { return _colorList; } }
 
-    [SerializeField] float _timeBetweenEnemieSpawn;
     [SerializeField] bool _canSpawnEnemies;
+    [SerializeField] float _timeBetweenEnemieSpawn;
 
+    [Space(10)]
+    [SerializeField] bool _hasBoss;
     [SerializeField] int _enemiesUntilBoss;
-    [SerializeField] int _currentEnemiesKilled;
+    int _currentEnemiesKilled;
     
     public bool CanSpawnEnemies(bool b)
     {
@@ -115,7 +117,7 @@ public class GameManager : MonoBehaviour
     {
         if(_currentPlayer == null)
         {
-            Checkpoint.OnSpawnPlayer();
+            Checkpoint.OnSpawnPlayer?.Invoke();
         }
 
         return _currentPlayer;
@@ -139,6 +141,8 @@ public class GameManager : MonoBehaviour
     void KilledEnemies()
     {
         _currentEnemiesKilled++;
+
+        if (!_hasBoss) return;
 
         if(_currentEnemiesKilled >= _enemiesUntilBoss)
         {

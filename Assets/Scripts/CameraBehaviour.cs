@@ -74,11 +74,16 @@ public class CameraBehaviour : MonoBehaviour
                 }
             case CamType.CHECKPOINT_CAM:
                 {
+                    if(_chkpntCam != null)
+                    {
+                        _chkpntCam = null;
+                    }
+
                     var temp = objFocus.GetComponent<Checkpoint>();
 
                     _chkpntCam = temp.chkpntCam.GetComponent<CinemachineVirtualCamera>();
 
-                    _freeLook.enabled = false;
+                    //_freeLook.enabled = false;
 
                     _chkpntCam.LookAt = objFocus.transform;
                     _chkpntCam.Follow = objFocus.transform;
@@ -204,5 +209,11 @@ public class CameraBehaviour : MonoBehaviour
         OnChangeToBossCam = BossCam;
         OnShakeCam = ShakeCamera;
         OnChangeCam += ChangeCam;
+    }
+    private void OnDisable()
+    {
+        OnChangeToBossCam -= BossCam;
+        OnShakeCam -= ShakeCamera;
+        OnChangeCam -= ChangeCam;
     }
 }

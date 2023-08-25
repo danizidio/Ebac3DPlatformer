@@ -65,7 +65,9 @@ public class Checkpoint : MonoBehaviour, Iinteractible
     {
         if (_checkpoint != SaveManager.Instance.saveGame.checkpoints) return;
 
-        CameraBehaviour.OnChangeCam?.Invoke(CamType.CHECKPOINT_CAM, this.gameObject);
+        GameObject g = this.gameObject;
+
+        CameraBehaviour.OnChangeCam?.Invoke(CamType.CHECKPOINT_CAM, g);
 
         _vfxPortal.enabled = true;
 
@@ -96,5 +98,9 @@ public class Checkpoint : MonoBehaviour, Iinteractible
     private void OnEnable()
     {
         OnSpawnPlayer += SpawnPlayer;
+    }
+    void OnDisable()
+    {
+        OnSpawnPlayer -= SpawnPlayer;
     }
 }

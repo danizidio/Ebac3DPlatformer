@@ -173,4 +173,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
     {
         OnSearchingPlayer += SearchPlayer;
     }
+    void OnDisable()
+    {
+        OnSearchingPlayer -= SearchPlayer;
+    }
 }

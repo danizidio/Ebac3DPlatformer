@@ -65,6 +65,13 @@ public class SaveManager : Singleton<SaveManager>
         File.WriteAllText(_path, json);
     }
 
+    public void StageCleared()
+    {
+        _saveGame.lastStage++;
+
+        Save();
+    }
+
     public void SetCheckPoint(Checkpoints checkpoint)
     {
         _saveGame.checkpoints = checkpoint;
