@@ -12,3 +12,23 @@ public enum ClothTypes
     DEFENSE,
     ATTACK
 }
+
+public enum MusicType
+{
+        NONE,
+        MAINMENU,
+        GAMEPLAY,
+        PAUSE,
+        GAME_LOOSE,
+        GAME_WIN,
+        BOSS
+}
+
+public enum SfxType
+{
+    NONE,
+    COIN_TAKEN,
+    PORTAL,
+    CHECKPOINT_ACTIVATE,
+    SPACESHIP_LAUNCH
+}
