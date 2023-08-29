@@ -1,7 +1,6 @@
 using UnityEngine;
 using StateMachines;
 using System;
-using DG.Tweening.Core.Easing;
 
 public class GameplaySateMachine : MonoBehaviour
 {

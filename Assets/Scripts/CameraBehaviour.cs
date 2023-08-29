@@ -3,8 +3,6 @@ using System.Collections;
 using System;
 using UnityEngine;
 using Cinemachine;
-using CommonMethodsLibrary;
-using NaughtyAttributes;
 
 public enum CamType
 {

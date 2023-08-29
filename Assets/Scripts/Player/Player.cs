@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 using System;
 using StateMachines;
 using Animations;
-using NaughtyAttributes;
-using static Player;
 
 public class Player : MonoBehaviour, IDamageable
 {
