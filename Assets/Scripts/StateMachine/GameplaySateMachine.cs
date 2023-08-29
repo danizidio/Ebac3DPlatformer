@@ -65,6 +65,7 @@ public class GameplayState_START : StateBase
     {
         g = (GameManager)o;
 
+        SoundManager.Instance.PlayMusicByType(MusicType.GAMEPLAY);
 
         //g.CanSpawnEnemies(true);
     }
@@ -113,6 +114,8 @@ public class GameplayState_BOSSBATTLE : StateBase
 
         g.CanSpawnEnemies(false);
 
+        SoundManager.Instance.PlayMusicByType(MusicType.BOSS);
+
         GameObject temp = g.SpawnBoss();
 
         GameObject[] gameObjects = { temp, g.currentPlayer.gameObject };
@@ -141,7 +144,7 @@ public class GameplayState_PAUSE : StateBase
     {
         g = (GameManager)o;
 
-
+        SoundManager.Instance.PlayMusicByType(MusicType.PAUSE);
     }
 
     public override void OnStateStay()
@@ -184,7 +187,9 @@ public class GameplayState_VICTORY : StateBase
 
     public override void OnStateEnter(object o = null)
     {
-       //g = (GameManager)o;
+        //g = (GameManager)o;
+
+        SfxQueue.OnPlaySfx?.Invoke(SfxType.SPACESHIP_LAUNCH);
 
         Inventory.OnSaveInventory?.Invoke();
 

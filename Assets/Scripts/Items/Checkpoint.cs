@@ -72,6 +72,8 @@ public class Checkpoint : MonoBehaviour, Iinteractible
         _vfxPortal.enabled = true;
 
         GameManager.OnInstantiatePlayer?.Invoke(_vfxPortal.transform.position);
+
+        SfxQueue.OnPlaySfx?.Invoke(SfxType.PORTAL);
     }
 
     void SetActiveCheckPoint()
@@ -93,6 +95,8 @@ public class Checkpoint : MonoBehaviour, Iinteractible
         SaveManager.Instance.SetCheckPoint(_checkpoint);
 
         MessageLog.OnCallMessage?.Invoke("CHECKPOINT");
+
+        SfxQueue.OnPlaySfx?.Invoke(SfxType.CHECKPOINT_ACTIVATE);
     }
 
     private void OnEnable()

@@ -29,6 +29,8 @@ public class MainMenuBehaviour : Singleton<MainMenuBehaviour>
     private void Start()
     {
         ShowMenu(MenuPieces.MAIN, ButtonTypes.NULL);
+
+        SoundManager.Instance.PlayMusicByType(MusicType.MAINMENU);
     }
 
     public void ShowMenu(MenuPieces menuPieces, ButtonTypes buttonTypes)

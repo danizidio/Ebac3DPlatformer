@@ -354,5 +354,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
+  _sfxType: 1
   _coinTaken: 0
   _coinTakeFX: {fileID: 2784247346059300082}

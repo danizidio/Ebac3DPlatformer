@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
+  _sfxType: 1
   _coinTaken: 0
   _coinTakeFX: {fileID: 5631676637255073934}
 --- !u!1 &5631676637255073934

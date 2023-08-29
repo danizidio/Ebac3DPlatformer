@@ -17,6 +17,18 @@ public class Item : CollectibleItens
             transform.position = Vector3.MoveTowards(transform.position, _playerPos, 5 * Time.deltaTime);
         }
     }
+    protected override void CollectedItem()
+    {
+        _coinTakeFX.GetComponent<VisualEffect>().SetBool("Taken", true);
+
+        SfxQueue.OnPlaySfx?.Invoke(sfxType);
+
+        Inventory.OnCollectItem?.Invoke(type);
+
+        _coinTaken = true;
+
+        Destroy(gameObject, 1);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,14 +40,4 @@ public class Item : CollectibleItens
         CollectedItem();
     }
 
-    protected override void CollectedItem()
-    {
-        _coinTakeFX.GetComponent<VisualEffect>().SetBool("Taken", true);
-
-        Inventory.OnCollectItem?.Invoke(type);
-
-        _coinTaken = true;
-
-        Destroy(gameObject, 1);
-    }
 }

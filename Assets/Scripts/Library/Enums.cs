@@ -28,6 +28,8 @@ public enum SfxType
 {
     NONE,
     COIN_TAKEN,
+    CHEST_OPEN,
+    POWERUP,
     PORTAL,
     CHECKPOINT_ACTIVATE,
     SPACESHIP_LAUNCH

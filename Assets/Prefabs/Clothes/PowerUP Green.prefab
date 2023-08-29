@@ -305,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6735a16a3cfd74147adb256baa05027f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
+  _type: 3
+  _sfxType: 3
   _clothType: 1
   _powerups: {fileID: 11400000, guid: d0896f3850de9d443ba40c75f1b0efe2, type: 2}

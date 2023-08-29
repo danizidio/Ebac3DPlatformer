@@ -1,48 +1,48 @@
 using CommonMethodsLibrary;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 
 public class SoundManager : Singleton<SoundManager>
 {
+    [SerializeField] SO_Sounds _sounds;
+    public SO_Sounds So_Sounds {  get { return _sounds; } }
+
     [SerializeField] AudioSource _audioSource;
-    [SerializeField] List<MusicSetup> _musicSetupList;
-    [SerializeField]List<SFXSetup> _sfxSetupList;
+
+    [SerializeField] GameObject _musicPlayer;
+    public GameObject musicPlayer { get { return _musicPlayer; } }
 
     public void PlayMusicByType(MusicType type)
     {
+        if(_audioSource == null)
+        {
+            MusicPlayer m = GameObject.FindAnyObjectByType<MusicPlayer>();
+            if (m != null)
+            {
+                _audioSource = m.GetComponent<AudioSource>();
+            }
+            else
+            {
+                Instantiate(_musicPlayer);
+                _audioSource = _musicPlayer.GetComponent<AudioSource>();
+            }
+        }
+
         var music = GetMusicByType(type);
-        _audioSource.clip = music.audioClip;
-        _audioSource.Play();
+        if (music != null)
+        {
+            _audioSource.clip = music.audioClip;
+            _audioSource.Play();
+        }
     }
 
     MusicSetup GetMusicByType(MusicType type)
     {
-        return _musicSetupList.Find(item => item.musicType == type);
+        return _sounds.musicSetupList.Find(item => item.musicType == type);
     }
 
-    SFXSetup GetSfxByType(SfxType type)
+    public SFXSetup GetSfxByType(SfxType type)
     {
-        return _sfxSetupList.Find(item => item.sfxType == type);
+        return _sounds.sfxSetupList.Find(item => item.sfxType == type);
     }
-}
-
-[Serializable]
-public class MusicSetup
-{
-    [SerializeField] MusicType _musicType;
-    public MusicType musicType { get { return _musicType;} }
-    [SerializeField] AudioClip _audioClip;
-    public AudioClip audioClip { get { return _audioClip; } }
-}
-
-[Serializable]
-public class SFXSetup
-{
-    [SerializeField] SfxType _sfxType;
-    public SfxType sfxType { get { return _sfxType; } }
-    [SerializeField] AudioClip _audioClip;
-    public AudioClip audioClip { get { return _audioClip; } }
 }

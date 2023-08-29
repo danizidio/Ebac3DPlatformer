@@ -166,8 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
+  _sfxType: 3
   _clothType: 2
   _powerups: {fileID: 11400000, guid: d0896f3850de9d443ba40c75f1b0efe2, type: 2}
-  _projectile: {fileID: -4943852272328632769, guid: 6c7908381a3c8eb45b07cfefb424459f,
-    type: 3}
-  _shootTime: 1
